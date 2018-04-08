@@ -31,12 +31,9 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.gridControlCoinDetail = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.coinListView = new CryptocurrencyAnalysisApp.View.CoinsDetail.CoinsDetailView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlCoinDetail)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -52,7 +49,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.gridControlCoinDetail);
+            this.tabPage1.Controls.Add(this.coinListView);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -71,21 +68,13 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // gridControlCoinDetail
+            // coinListView
             // 
-            this.gridControlCoinDetail.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlCoinDetail.Location = new System.Drawing.Point(3, 3);
-            this.gridControlCoinDetail.MainView = this.gridView1;
-            this.gridControlCoinDetail.Name = "gridControlCoinDetail";
-            this.gridControlCoinDetail.Size = new System.Drawing.Size(815, 472);
-            this.gridControlCoinDetail.TabIndex = 0;
-            this.gridControlCoinDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
-            // 
-            // gridView1
-            // 
-            this.gridView1.GridControl = this.gridControlCoinDetail;
-            this.gridView1.Name = "gridView1";
+            this.coinListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.coinListView.Location = new System.Drawing.Point(3, 3);
+            this.coinListView.Name = "coinListView";
+            this.coinListView.Size = new System.Drawing.Size(815, 472);
+            this.coinListView.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -95,10 +84,9 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "MainForm";
             this.Text = "Cryptocurrency Analysis";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlCoinDetail)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -108,8 +96,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private DevExpress.XtraGrid.GridControl gridControlCoinDetail;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private View.CoinsDetail.CoinsDetailView coinListView;
     }
 }
 

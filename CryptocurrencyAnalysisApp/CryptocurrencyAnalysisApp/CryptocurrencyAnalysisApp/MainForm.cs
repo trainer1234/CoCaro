@@ -16,5 +16,10 @@ namespace CryptocurrencyAnalysisApp
         {
             InitializeComponent();
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            coinListView.LoadCoinList();
+        }        
     }
 }
