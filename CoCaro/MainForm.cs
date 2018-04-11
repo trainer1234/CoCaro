@@ -1,0 +1,42 @@
+﻿using CoCaro.View.PlayWithPlayer;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace CoCaro
+{
+    public partial class MainForm : Form
+    {
+        public MainForm()
+        {
+            InitializeComponent();
+        }
+
+        private void btnPlayWithCom_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Coming Soon!");
+        }
+
+        private void btnPlayWithPlayer_Click(object sender, EventArgs e)
+        {
+            PlayWithPlayerViewForm form = new PlayWithPlayerViewForm();
+            form.Show();
+        }
+
+        private void btnWatchRecord_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}

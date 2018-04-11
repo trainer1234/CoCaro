@@ -1,0 +1,11 @@
+C:\Users\SuperStar\Desktop\Oracle\CoCaro\CoCaro\CoCaro\bin\Debug\CoCaro.exe.config
+C:\Users\SuperStar\Desktop\Oracle\CoCaro\CoCaro\CoCaro\bin\Debug\CoCaro.exe
+C:\Users\SuperStar\Desktop\Oracle\CoCaro\CoCaro\CoCaro\bin\Debug\CoCaro.pdb
+C:\Users\SuperStar\Desktop\Oracle\CoCaro\CoCaro\CoCaro\obj\Debug\CoCaro.csprojResolveAssemblyReference.cache
+C:\Users\SuperStar\Desktop\Oracle\CoCaro\CoCaro\CoCaro\obj\Debug\CoCaro.MainForm.resources
+C:\Users\SuperStar\Desktop\Oracle\CoCaro\CoCaro\CoCaro\obj\Debug\CoCaro.Properties.Resources.resources
+C:\Users\SuperStar\Desktop\Oracle\CoCaro\CoCaro\CoCaro\obj\Debug\CoCaro.View.PlayWithPlayer.PlayWithPlayerViewForm.resources
+C:\Users\SuperStar\Desktop\Oracle\CoCaro\CoCaro\CoCaro\obj\Debug\CoCaro.csproj.GenerateResource.Cache
+C:\Users\SuperStar\Desktop\Oracle\CoCaro\CoCaro\CoCaro\obj\Debug\CoCaro.csproj.CoreCompileInputs.cache
+C:\Users\SuperStar\Desktop\Oracle\CoCaro\CoCaro\CoCaro\obj\Debug\CoCaro.exe
+C:\Users\SuperStar\Desktop\Oracle\CoCaro\CoCaro\CoCaro\obj\Debug\CoCaro.pdb
