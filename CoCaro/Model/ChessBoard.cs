@@ -16,12 +16,16 @@ namespace CoCaro.Model
         public Chess[,] Chesses { get; set; }
         public int NumberOfMove { get; set; }
         public int TurnOwner { get; set; }
+        public bool IsEnd { get; set; }    
+        public int MoveTime { get; set; }
 
         public ChessBoard()
         {
-            Chesses = new Chess[BoardRows, BoardColumns];
+            Chesses = new Chess[BoardRows + 1, BoardColumns + 1];
             NumberOfMove = 0;
             TurnOwner = 1;
+            IsEnd = false;
+            MoveTime = 20;
         }
     }
 }

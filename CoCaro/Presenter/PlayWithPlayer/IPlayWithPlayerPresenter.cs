@@ -9,10 +9,10 @@ namespace CoCaro.Presenter.PlayWithPlayer
 {
     interface IPlayWithPlayerPresenter
     {
-        int CheckGame(ChessBoard chessBoard);
-        bool CheckVertical(ChessBoard chessBoard);
-        bool CheckHorizontal(ChessBoard chessBoard);
-        bool CheckInclined(ChessBoard chessBoard);
-        bool CheckReverseInclined(ChessBoard chessBoard);
+        int CheckGame(ChessBoard chessBoard, int row, int column);
+        bool CheckVertical();
+        bool CheckHorizontal();
+        bool CheckInclined();
+        bool CheckReverseInclined();
     }
 }

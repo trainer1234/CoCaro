@@ -88,6 +88,7 @@
             this.Controls.Add(this.btnPlayWithPlayer);
             this.Controls.Add(this.btnPlayWithCom);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cờ Carô";
             this.ResumeLayout(false);
 

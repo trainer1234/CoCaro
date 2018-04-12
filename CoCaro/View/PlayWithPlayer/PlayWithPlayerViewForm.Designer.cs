@@ -28,14 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
+            // 
+            // timer
+            // 
+            this.timer.Interval = 1000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // PlayWithPlayerViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(864, 911);
+            this.ClientSize = new System.Drawing.Size(864, 961);
             this.Name = "PlayWithPlayerViewForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Chơi với người";
             this.Load += new System.EventHandler(this.PlayWithPlayerViewForm_Load);
             this.ResumeLayout(false);
@@ -43,5 +51,7 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.Timer timer;
     }
 }

@@ -12,44 +12,210 @@ namespace CoCaro.Presenter.PlayWithPlayer
     {
         private IPlayWithPlayerView view;
         private IDataSource dataSource;
-        public PlayWithPlayerPresenter(PlayWithPlayerViewForm view, DataSource dataSource)
+
+        private ChessBoard _ChessBoard;
+        private Chess LastMove;
+        public PlayWithPlayerPresenter(IPlayWithPlayerView view, IDataSource dataSource)
         {
             this.view = view;
             this.view.Presenter = this;
             this.dataSource = dataSource;
         }
-        public int CheckGame(ChessBoard chessBoard)
-        {            
+        public int CheckGame(ChessBoard chessBoard, int row, int column)
+        {
+            this._ChessBoard = chessBoard;
+            this.LastMove = chessBoard.Chesses[row, column];
+
             if(chessBoard.NumberOfMove == chessBoard.BoardRows * chessBoard.BoardColumns)
             {
                 return 0;
             }
-            //if(CheckHorizontal(chessBoard) || CheckVertical(chessBoard) ||
-            //    CheckInclined(chessBoard) || CheckReverseInclined(chessBoard))
-            //{
-            //    return 1;
-            //}
+            if (CheckHorizontal() || CheckVertical() ||
+                CheckInclined() || CheckReverseInclined())
+            {
+                return 1;
+            }
             return -1;
         }
 
-        public bool CheckHorizontal(ChessBoard chessBoard)
+        public bool CheckHorizontal()
         {
-            throw new NotImplementedException();
+            int count = 1;
+            for (int i = 1; count < 5; i++, count++)
+            {
+                if(LastMove.Column + i > _ChessBoard.BoardColumns)
+                {
+                    break;
+                }
+                Chess chess = _ChessBoard.Chesses[LastMove.Row, LastMove.Column + i];
+                if (chess.Owner != LastMove.Owner)
+                {
+                    break;
+                }
+            }
+            if (count == 5)
+            {
+                return true;
+            }
+            else
+            {
+                for (int i = 1; count < 5; i++, count++)
+                {
+                    if(LastMove.Column - i < 1)
+                    {
+                        break;
+                    }
+                    Chess chess = _ChessBoard.Chesses[LastMove.Row, LastMove.Column - i];
+                    if (chess.Owner != LastMove.Owner)
+                    {
+                        break;
+                    }
+                }
+                if (count == 5)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
-        public bool CheckInclined(ChessBoard chessBoard)
+        public bool CheckInclined()
         {
-            throw new NotImplementedException();
+            int count = 1;
+            for (int i = 1; count < 5; i++, count++)
+            {
+                if (LastMove.Column + i > _ChessBoard.BoardColumns ||
+                    LastMove.Row + i > _ChessBoard.BoardRows)
+                {
+                    break;
+                }
+                Chess chess = _ChessBoard.Chesses[LastMove.Row + i, LastMove.Column + i];
+                if (chess.Owner != LastMove.Owner)
+                {
+                    break;
+                }
+            }
+            if (count == 5)
+            {
+                return true;
+            }
+            else
+            {
+                for (int i = 1; count < 5; i++, count++)
+                {
+                    if (LastMove.Column - i < 1 ||
+                        LastMove.Row - i < 1)
+                    {
+                        break;
+                    }
+                    Chess chess = _ChessBoard.Chesses[LastMove.Row - i, LastMove.Column - i];
+                    if (chess.Owner != LastMove.Owner)
+                    {
+                        break;
+                    }
+                }
+                if (count == 5)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }            
         }
 
-        public bool CheckReverseInclined(ChessBoard chessBoard)
+        public bool CheckReverseInclined()
         {
-            throw new NotImplementedException();
+            int count = 1;
+            for (int i = 1; count < 5; i++, count++)
+            {
+                if (LastMove.Column - i < 1 ||
+                    LastMove.Row + i > _ChessBoard.BoardRows)
+                {
+                    break;
+                }
+                Chess chess = _ChessBoard.Chesses[LastMove.Row + i, LastMove.Column - i];
+                if (chess.Owner != LastMove.Owner)
+                {
+                    break;
+                }
+            }
+            if (count == 5)
+            {
+                return true;
+            }
+            else
+            {
+                for (int i = 1; count < 5; i++, count++)
+                {
+                    if (LastMove.Column + i > _ChessBoard.BoardColumns ||
+                        LastMove.Row - i < 1)
+                    {
+                        break;
+                    }
+                    Chess chess = _ChessBoard.Chesses[LastMove.Row - i, LastMove.Column + i];
+                    if (chess.Owner != LastMove.Owner)
+                    {
+                        break;
+                    }
+                }
+                if (count == 5)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }            
         }
 
-        public bool CheckVertical(ChessBoard chessBoard)
+        public bool CheckVertical()
         {
-            throw new NotImplementedException();
+            int count = 1;
+            for (int i = 1; count < 5; i++, count++)
+            {
+                if (LastMove.Row + i > _ChessBoard.BoardRows)
+                {
+                    break;
+                }
+                Chess chess = _ChessBoard.Chesses[LastMove.Row + i, LastMove.Column];
+                if (chess.Owner != LastMove.Owner)
+                {
+                    break;
+                }
+            }
+            if (count == 5)
+            {
+                return true;
+            }
+            else
+            {
+                for (int i = 1; count < 5; i++, count++)
+                {
+                    if (LastMove.Row - i < 1)
+                    {
+                        break;
+                    }
+                    Chess chess = _ChessBoard.Chesses[LastMove.Row - i, LastMove.Column];
+                    if (chess.Owner != LastMove.Owner)
+                    {
+                        break;
+                    }
+                }
+                if (count == 5)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }            
         }
     }
 }
