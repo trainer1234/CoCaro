@@ -110,16 +110,28 @@ namespace CoCaro.View.PlayWithPlayer
         private void ChangeTurn()
         {
             Label lblTurn = this.Controls.Find("lblTurn", false)[0] as Label;
+            ResetTimer();
             if (_ChessBoard.TurnOwner == 1)
             {
                 _ChessBoard.TurnOwner = 2;
                 lblTurn.Text = "Đến lượt O đi";
+                lblTurn.ForeColor = Color.Orange;
             }
             else
             {
                 _ChessBoard.TurnOwner = 1;
                 lblTurn.Text = "Đến lượt X đi";
+                lblTurn.ForeColor = Color.Blue;
             }
+        }
+
+        private void ResetTimer()
+        {
+            Label lblTime = this.Controls.Find("lblTime", false)[0] as Label;
+            ProgressBar prgTime = this.Controls.Find("prgTime", false)[0] as ProgressBar;
+
+            lblTime.Text = _ChessBoard.MoveTime.ToString();
+            prgTime.Value = 100;
         }
         private void EndGame(bool isTimeUp)
         {
