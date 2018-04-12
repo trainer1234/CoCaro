@@ -57,3 +57,14 @@ C:\Users\SuperStar\Desktop\Oracle\CoCaro\CoCaro\bin\Debug\es\DevExpress.Pdf.v17.
 C:\Users\SuperStar\Desktop\Oracle\CoCaro\CoCaro\bin\Debug\ja\DevExpress.Pdf.v17.1.Core.resources.dll
 C:\Users\SuperStar\Desktop\Oracle\CoCaro\CoCaro\bin\Debug\ru\DevExpress.Pdf.v17.1.Core.resources.dll
 C:\Users\SuperStar\Desktop\Oracle\CoCaro\CoCaro\obj\Debug\CoCaro.exe.licenses
+D:\kha_giai_minh\FIT_CAMNANGSV_K4 (E)\Data\ThuVien\Oracle\Project\CoCaro\CoCaro\bin\Debug\CoCaro.exe.config
+D:\kha_giai_minh\FIT_CAMNANGSV_K4 (E)\Data\ThuVien\Oracle\Project\CoCaro\CoCaro\bin\Debug\CoCaro.exe
+D:\kha_giai_minh\FIT_CAMNANGSV_K4 (E)\Data\ThuVien\Oracle\Project\CoCaro\CoCaro\bin\Debug\CoCaro.pdb
+D:\kha_giai_minh\FIT_CAMNANGSV_K4 (E)\Data\ThuVien\Oracle\Project\CoCaro\CoCaro\obj\Debug\CoCaro.csprojResolveAssemblyReference.cache
+D:\kha_giai_minh\FIT_CAMNANGSV_K4 (E)\Data\ThuVien\Oracle\Project\CoCaro\CoCaro\obj\Debug\CoCaro.MainForm.resources
+D:\kha_giai_minh\FIT_CAMNANGSV_K4 (E)\Data\ThuVien\Oracle\Project\CoCaro\CoCaro\obj\Debug\CoCaro.Properties.Resources.resources
+D:\kha_giai_minh\FIT_CAMNANGSV_K4 (E)\Data\ThuVien\Oracle\Project\CoCaro\CoCaro\obj\Debug\CoCaro.View.PlayWithPlayer.PlayWithPlayerViewForm.resources
+D:\kha_giai_minh\FIT_CAMNANGSV_K4 (E)\Data\ThuVien\Oracle\Project\CoCaro\CoCaro\obj\Debug\CoCaro.csproj.GenerateResource.Cache
+D:\kha_giai_minh\FIT_CAMNANGSV_K4 (E)\Data\ThuVien\Oracle\Project\CoCaro\CoCaro\obj\Debug\CoCaro.csproj.CoreCompileInputs.cache
+D:\kha_giai_minh\FIT_CAMNANGSV_K4 (E)\Data\ThuVien\Oracle\Project\CoCaro\CoCaro\obj\Debug\CoCaro.exe
+D:\kha_giai_minh\FIT_CAMNANGSV_K4 (E)\Data\ThuVien\Oracle\Project\CoCaro\CoCaro\obj\Debug\CoCaro.pdb
