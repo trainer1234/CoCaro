@@ -1,6 +1,6 @@
-﻿namespace CoCaro.View.PlayWithPlayer
+﻿namespace CoCaro.View.History
 {
-    partial class PlayWithPlayerViewForm
+    partial class HistoryViewForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,37 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.timerTurn = new System.Windows.Forms.Timer(this.components);
-            this.timerGameDuration = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // timer
-            // 
-            this.timerTurn.Interval = 1000;
-            this.timerTurn.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // timerGameDuration
-            // 
-            this.timerGameDuration.Interval = 1000;
-            this.timerGameDuration.Tick += new System.EventHandler(this.timerGameDuration_Tick);
-            // 
-            // PlayWithPlayerViewForm
+            // HistoryViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(864, 961);
-            this.Name = "PlayWithPlayerViewForm";
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(871, 572);
+            this.Name = "HistoryViewForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Chơi với người";
-            this.Load += new System.EventHandler(this.PlayWithPlayerViewForm_Load);
+            this.Text = "Xem lại lịch sử";
+            this.Load += new System.EventHandler(this.HistoryViewForm_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Timer timerTurn;
-        private System.Windows.Forms.Timer timerGameDuration;
     }
 }

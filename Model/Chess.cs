@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CoCaro.Model
 {
-    class Chess
+    public class Chess
     {
         public int Column { get; set; }
         public int Row { get; set; }

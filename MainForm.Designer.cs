@@ -28,22 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnPlayWithCom = new System.Windows.Forms.Button();
             this.btnPlayWithPlayer = new System.Windows.Forms.Button();
             this.btnWatchRecord = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
+            this.btnPlayWithCom = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // btnPlayWithCom
-            // 
-            this.btnPlayWithCom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btnPlayWithCom.Location = new System.Drawing.Point(219, 145);
-            this.btnPlayWithCom.Name = "btnPlayWithCom";
-            this.btnPlayWithCom.Size = new System.Drawing.Size(194, 59);
-            this.btnPlayWithCom.TabIndex = 0;
-            this.btnPlayWithCom.Text = "Chơi với máy";
-            this.btnPlayWithCom.UseVisualStyleBackColor = true;
-            this.btnPlayWithCom.Click += new System.EventHandler(this.btnPlayWithCom_Click);
             // 
             // btnPlayWithPlayer
             // 
@@ -77,6 +66,17 @@
             this.btnExit.Text = "Thoát";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // btnPlayWithCom
+            // 
+            this.btnPlayWithCom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btnPlayWithCom.Location = new System.Drawing.Point(219, 145);
+            this.btnPlayWithCom.Name = "btnPlayWithCom";
+            this.btnPlayWithCom.Size = new System.Drawing.Size(194, 59);
+            this.btnPlayWithCom.TabIndex = 0;
+            this.btnPlayWithCom.Text = "Chơi với máy";
+            this.btnPlayWithCom.UseVisualStyleBackColor = true;
+            this.btnPlayWithCom.Click += new System.EventHandler(this.btnPlayWithCom_Click);
             // 
             // MainForm
             // 

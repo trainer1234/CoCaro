@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace CoCaro.Model
 {
-    interface IDataSource
+    public interface IDataSource
     {
+        ChessBoard CreateNewGame();
+        void StoreMove(int id, string move);
+        List<ChessBoard> GetHistory();
+        ChessBoard GetGameRecord(int id);
     }
 }

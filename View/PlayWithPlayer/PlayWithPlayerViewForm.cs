@@ -26,7 +26,7 @@ namespace CoCaro.View.PlayWithPlayer
 
         public void initBoard()
         {
-            _ChessBoard = new ChessBoard();
+            _ChessBoard = Presenter.CreateNewGame();
 
             Label turnLabel = new Label();
             turnLabel.Name = "lblTurn";
@@ -37,7 +37,7 @@ namespace CoCaro.View.PlayWithPlayer
             turnLabel.Width = this.Width;
             turnLabel.Height = 30;
             turnLabel.Location = new Point(0,
-                _ChessBoard.BoardPaddingTop - _ChessBoard.ChessSize * 3);
+                ChessBoard.BoardPaddingTop - ChessBoard.ChessSize * 3);
             Controls.Add(turnLabel);
 
             Label timeLabel = new Label();
@@ -48,54 +48,54 @@ namespace CoCaro.View.PlayWithPlayer
             timeLabel.TextAlign = ContentAlignment.MiddleCenter;
             timeLabel.Width = 40;
             timeLabel.Height = 30;
-            timeLabel.Location = new Point(_ChessBoard.BoardPaddingLeft,
-                _ChessBoard.BoardPaddingTop - _ChessBoard.ChessSize * 2);
+            timeLabel.Location = new Point(ChessBoard.BoardPaddingLeft,
+                ChessBoard.BoardPaddingTop - ChessBoard.ChessSize * 2);
             Controls.Add(timeLabel);
 
             ProgressBar progressBar = new ProgressBar();
             progressBar.Name = "prgTime";
-            progressBar.Location = new Point(_ChessBoard.BoardPaddingLeft + timeLabel.Width,
-                _ChessBoard.BoardPaddingTop - _ChessBoard.ChessSize * 2);
-            progressBar.Width = _ChessBoard.BoardColumns * _ChessBoard.ChessSize - timeLabel.Width;
+            progressBar.Location = new Point(ChessBoard.BoardPaddingLeft + timeLabel.Width,
+                ChessBoard.BoardPaddingTop - ChessBoard.ChessSize * 2);
+            progressBar.Width = ChessBoard.BoardColumns * ChessBoard.ChessSize - timeLabel.Width;
             progressBar.Value = 100;
             Controls.Add(progressBar);
 
-            for(int i = 0; i < _ChessBoard.BoardRows; i++)
+            for(int i = 0; i < ChessBoard.BoardRows; i++)
             {
                 Label label = new Label();
                 label.Text = ((char)('A' + i)).ToString();
                 label.Font = new Font("Arial", 14, FontStyle.Bold);
                 label.TextAlign = ContentAlignment.MiddleCenter;
-                label.Height = _ChessBoard.ChessSize;
-                label.Width = _ChessBoard.ChessSize;
-                label.Location = new Point(_ChessBoard.BoardPaddingLeft + _ChessBoard.ChessSize * i,
-                    _ChessBoard.BoardPaddingTop - _ChessBoard.ChessSize);
+                label.Height = ChessBoard.ChessSize;
+                label.Width = ChessBoard.ChessSize;
+                label.Location = new Point(ChessBoard.BoardPaddingLeft + ChessBoard.ChessSize * i,
+                    ChessBoard.BoardPaddingTop - ChessBoard.ChessSize);
                 Controls.Add(label);
             }
 
-            for (int i = 0; i < _ChessBoard.BoardColumns; i++)
+            for (int i = 0; i < ChessBoard.BoardColumns; i++)
             {
                 Label label = new Label();
                 label.Text = (i + 1).ToString();
                 label.Font = new Font("Arial", 14, FontStyle.Bold);
                 label.TextAlign = ContentAlignment.MiddleCenter;
-                label.Height = _ChessBoard.ChessSize;
-                label.Width = _ChessBoard.ChessSize;
-                label.Location = new Point(_ChessBoard.BoardPaddingLeft - _ChessBoard.ChessSize,
-                    _ChessBoard.BoardPaddingTop + _ChessBoard.ChessSize * i);
+                label.Height = ChessBoard.ChessSize;
+                label.Width = ChessBoard.ChessSize;
+                label.Location = new Point(ChessBoard.BoardPaddingLeft - ChessBoard.ChessSize,
+                    ChessBoard.BoardPaddingTop + ChessBoard.ChessSize * i);
                 Controls.Add(label);
             }
 
-            for (int i = 1; i <= _ChessBoard.BoardRows; i++)
+            for (int i = 1; i <= ChessBoard.BoardRows; i++)
             {                
-                for(int j = 1; j <= _ChessBoard.BoardColumns; j++)
+                for(int j = 1; j <= ChessBoard.BoardColumns; j++)
                 {                    
                     Button button = new Button();
-                    button.Name = "OCo_" + i.ToString() + "_" + j.ToString();                    
-                    button.Width = _ChessBoard.ChessSize;
-                    button.Height = _ChessBoard.ChessSize;
-                    button.Location = new Point(_ChessBoard.BoardPaddingLeft + _ChessBoard.ChessSize * (j - 1),
-                        _ChessBoard.BoardPaddingTop + _ChessBoard.ChessSize * (i - 1));
+                    button.Name = "Chess_" + i.ToString() + "_" + j.ToString();                    
+                    button.Width = ChessBoard.ChessSize;
+                    button.Height = ChessBoard.ChessSize;
+                    button.Location = new Point(ChessBoard.BoardPaddingLeft + ChessBoard.ChessSize * (j - 1),
+                        ChessBoard.BoardPaddingTop + ChessBoard.ChessSize * (i - 1));
                     button.Click += btnChess_Click;
                     button.BackgroundImageLayout = ImageLayout.Stretch;                    
                     Controls.Add(button);
@@ -104,7 +104,9 @@ namespace CoCaro.View.PlayWithPlayer
                 }
             }
 
-            timer.Start();
+            _ChessBoard.StartTime = DateTime.Now;
+            timerTurn.Start();
+            timerGameDuration.Start();
         }
 
         private void ChangeTurn()
@@ -133,15 +135,18 @@ namespace CoCaro.View.PlayWithPlayer
             lblTime.Text = _ChessBoard.MoveTime.ToString();
             prgTime.Value = 100;
         }
-        private void EndGame(bool isTimeUp)
+        private void EndGame(int result, bool isTimeUp)
         {
             _ChessBoard.IsEnd = true;
+
+            timerTurn.Stop();
+            timerGameDuration.Stop();
 
             Label label = new Label();
             label.Height = 30;
             label.Width = this.Width;
             label.Location = new Point(0,
-                _ChessBoard.BoardRows * _ChessBoard.ChessSize + _ChessBoard.BoardPaddingTop);
+                ChessBoard.BoardRows * ChessBoard.ChessSize + ChessBoard.BoardPaddingTop);
             label.Font = new Font(new FontFamily("Arial"), 16, FontStyle.Bold);
             label.TextAlign = ContentAlignment.MiddleCenter;
             string s = "";
@@ -150,25 +155,37 @@ namespace CoCaro.View.PlayWithPlayer
                 ChangeTurn();
             }
 
-            if (_ChessBoard.TurnOwner == 1)
+            if(result == 0)
             {
-                s = "Người chơi X thắng!";
-                label.ForeColor = Color.Blue;
+                s = "Hòa!";
+                label.ForeColor = Color.Green;
                 label.Text = s;
             }
             else
             {
-                s = "Người chơi O thắng!";
-                label.ForeColor = Color.Orange;
-                label.Text = s;
-            }
+                if (_ChessBoard.TurnOwner == 1)
+                {
+                    s = "Người chơi X thắng!";
+                    label.ForeColor = Color.Blue;
+                    label.Text = s;
+                    _ChessBoard.Winer = 1;
+                }
+                else
+                {
+                    s = "Người chơi O thắng!";
+                    label.ForeColor = Color.Orange;
+                    label.Text = s;
+                    _ChessBoard.Winer = 2;
+                }
+            }    
+            
             Controls.Add(label);
 
             Button newGameButton = new Button();
             newGameButton.Height = 40;
             newGameButton.Width = 90;
             newGameButton.Location = new Point(this.Width / 2 - newGameButton.Width / 2,
-                label.Location.Y + _ChessBoard.ChessSize);
+                label.Location.Y + ChessBoard.ChessSize);
             newGameButton.Text = "Chơi lại";
             newGameButton.Font = new Font(new FontFamily("Arial"), 12, FontStyle.Bold);
             newGameButton.Click += btnNewGame_Click;
@@ -185,8 +202,8 @@ namespace CoCaro.View.PlayWithPlayer
 
         private void btnChess_Click(object sender, EventArgs e)
         {            
-            int row = (((Button)sender).Location.Y - _ChessBoard.BoardPaddingTop) / _ChessBoard.ChessSize + 1;
-            int column = (((Button)sender).Location.X - _ChessBoard.BoardPaddingLeft) / _ChessBoard.ChessSize + 1;
+            int row = (((Button)sender).Location.Y - ChessBoard.BoardPaddingTop) / ChessBoard.ChessSize + 1;
+            int column = (((Button)sender).Location.X - ChessBoard.BoardPaddingLeft) / ChessBoard.ChessSize + 1;
             
             if (_ChessBoard.Chesses[row, column].Owner != 0 || _ChessBoard.IsEnd)
             {
@@ -207,17 +224,16 @@ namespace CoCaro.View.PlayWithPlayer
 
             _ChessBoard.NumberOfMove++;
 
+            Presenter.StoreMove(this._ChessBoard.Id ,row, column);
             int result = Presenter.CheckGame(_ChessBoard, row, column);
-            if (result == 0)
+            if (result != -1)
             {
-                MessageBox.Show("Hòa!");
+                EndGame(result, false);                
             }
-            else if(result == 1)
-            {                
-                EndGame(false);
-            }
-
-            ChangeTurn();                                   
+            else
+            {
+                ChangeTurn();
+            }                                               
         }        
 
         private void btnNewGame_Click(object sender, EventArgs e)
@@ -238,13 +254,18 @@ namespace CoCaro.View.PlayWithPlayer
 
             if (time == 0)
             {
-                timer.Stop();
-                EndGame(true);
+                timerTurn.Stop();
+                EndGame(1, true);
             }
             else if(time < 10)
             {
                 label.ForeColor = Color.Red;
             }            
+        }
+
+        private void timerGameDuration_Tick(object sender, EventArgs e)
+        {
+            _ChessBoard.GameDuration++;
         }
     }    
 }

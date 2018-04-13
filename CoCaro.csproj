@@ -66,10 +66,34 @@
     <Compile Include="Model\ChessBoard.cs" />
     <Compile Include="Model\DataSource.cs" />
     <Compile Include="Model\IDataSource.cs" />
+    <Compile Include="Presenter\History\HistoryPresenter.cs" />
+    <Compile Include="Presenter\History\IHistoryPresenter.cs" />
+    <Compile Include="Presenter\History\RecordReplay\IRecordReplayPresenter.cs" />
+    <Compile Include="Presenter\History\RecordReplay\RecordReplayPresenter.cs" />
     <Compile Include="Presenter\PlayWithPlayer\IPlayWithPlayerPresenter.cs" />
     <Compile Include="Presenter\PlayWithPlayer\PlayWithPlayerPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\History\HistoryViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\History\HistoryViewForm.Designer.cs">
+      <DependentUpon>HistoryViewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\History\IHistoryView.cs" />
+    <Compile Include="View\History\RecordReplay\IRecordReplayView.cs" />
+    <Compile Include="View\History\RecordReplay\RecordReplayViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\History\RecordReplay\RecordReplayViewForm.Designer.cs">
+      <DependentUpon>RecordReplayViewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\History\Record\RecordViewUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\History\Record\RecordViewUserControl.Designer.cs">
+      <DependentUpon>RecordViewUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\PlayWithPlayer\IPlayWithPlayerView.cs" />
     <Compile Include="View\PlayWithPlayer\PlayWithPlayerViewForm.cs">
       <SubType>Form</SubType>
@@ -90,6 +114,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\History\HistoryViewForm.resx">
+      <DependentUpon>HistoryViewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\History\RecordReplay\RecordReplayViewForm.resx">
+      <DependentUpon>RecordReplayViewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\History\Record\RecordViewUserControl.resx">
+      <DependentUpon>RecordViewUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\PlayWithPlayer\PlayWithPlayerViewForm.resx">
       <DependentUpon>PlayWithPlayerViewForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -108,16 +141,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Presenter\History\Record\" />
     <Folder Include="Presenter\PlayWIthCom\" />
-    <Folder Include="Presenter\Record\" />
     <Folder Include="View\PlayWithCom\" />
-    <Folder Include="View\Record\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\round.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\cross.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\up.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

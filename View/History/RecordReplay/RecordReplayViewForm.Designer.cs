@@ -1,6 +1,6 @@
-﻿namespace CoCaro.View.PlayWithPlayer
+﻿namespace CoCaro.View.History.RecordReplay
 {
-    partial class PlayWithPlayerViewForm
+    partial class RecordReplayViewForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,36 +29,29 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.timerTurn = new System.Windows.Forms.Timer(this.components);
-            this.timerGameDuration = new System.Windows.Forms.Timer(this.components);
+            this.timerAutoPlay = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // timer
+            // timerAutoPlay
             // 
-            this.timerTurn.Interval = 1000;
-            this.timerTurn.Tick += new System.EventHandler(this.timer_Tick);
+            this.timerAutoPlay.Interval = 1;
+            this.timerAutoPlay.Tick += new System.EventHandler(this.timerAutoPlay_Tick);
             // 
-            // timerGameDuration
-            // 
-            this.timerGameDuration.Interval = 1000;
-            this.timerGameDuration.Tick += new System.EventHandler(this.timerGameDuration_Tick);
-            // 
-            // PlayWithPlayerViewForm
+            // RecordReplayViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(864, 961);
-            this.Name = "PlayWithPlayerViewForm";
+            this.ClientSize = new System.Drawing.Size(1184, 961);
+            this.Name = "RecordReplayViewForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Chơi với người";
-            this.Load += new System.EventHandler(this.PlayWithPlayerViewForm_Load);
+            this.Text = "RecordReplayViewForm";
+            this.Load += new System.EventHandler(this.RecordReplayViewForm_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Timer timerTurn;
-        private System.Windows.Forms.Timer timerGameDuration;
+        private System.Windows.Forms.Timer timerAutoPlay;
     }
 }

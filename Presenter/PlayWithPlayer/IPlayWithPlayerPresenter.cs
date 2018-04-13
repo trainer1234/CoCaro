@@ -9,6 +9,8 @@ namespace CoCaro.Presenter.PlayWithPlayer
 {
     interface IPlayWithPlayerPresenter
     {
+        ChessBoard CreateNewGame();
+        void StoreMove(int id, int row, int column);
         int CheckGame(ChessBoard chessBoard, int row, int column);
         bool CheckVertical();
         bool CheckHorizontal();

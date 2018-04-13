@@ -1,4 +1,5 @@
-﻿using CoCaro.View.PlayWithPlayer;
+﻿using CoCaro.View.History;
+using CoCaro.View.PlayWithPlayer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,12 +32,13 @@ namespace CoCaro
 
         private void btnWatchRecord_Click(object sender, EventArgs e)
         {
-
+            HistoryViewForm form = new HistoryViewForm();
+            form.Show();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
+        }        
     }
 }
