@@ -168,14 +168,14 @@ namespace CoCaro.View.PlayWithPlayer
                     s = "Người chơi X thắng!";
                     label.ForeColor = Color.Blue;
                     label.Text = s;
-                    _ChessBoard.Winer = 1;
+                    _ChessBoard.Winner = 1;
                 }
                 else
                 {
                     s = "Người chơi O thắng!";
                     label.ForeColor = Color.Orange;
                     label.Text = s;
-                    _ChessBoard.Winer = 2;
+                    _ChessBoard.Winner = 2;
                 }
             }    
             

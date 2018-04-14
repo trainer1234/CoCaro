@@ -181,11 +181,11 @@ namespace CoCaro.View.History.RecordReplay
             else
             {
                 string s = "";
-                if(_ChessBoard.Winer == 1)
+                if(_ChessBoard.Winner == 1)
                 {
                     s = "X thắng!";
                 }
-                else if(_ChessBoard.Winer == 2)
+                else if(_ChessBoard.Winner == 2)
                 {
                     s = "O thắng!";
                 }

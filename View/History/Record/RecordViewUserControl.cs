@@ -31,12 +31,12 @@ namespace CoCaro.View.History.Record
             lblId.Text = "#" + (this._ChessBoard.Id + 1).ToString();
             lblDuration.Text = this._ChessBoard.GameDuration.ToString() + "s";
             lblStartTime.Text = this._ChessBoard.StartTime.ToLongTimeString();
-            if(this._ChessBoard.Winer == 1)
+            if(this._ChessBoard.Winner == 1)
             {
                 lblResult.Text = "X thắng";
                 lblResult.ForeColor = Color.Blue;
             }
-            else if(this._ChessBoard.Winer == 2)
+            else if(this._ChessBoard.Winner == 2)
             {
                 lblResult.Text = "O thắng";
                 lblResult.ForeColor = Color.Orange;

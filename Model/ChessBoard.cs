@@ -22,7 +22,8 @@ namespace CoCaro.Model
         public List<string> Moves { get; set; }
         public int GameDuration { get; set; }
         public DateTime StartTime { get; set; }
-        public int Winer { get; set; }
+        public int Winner { get; set; }
+
         public ChessBoard()
         {
             Chesses = new Chess[BoardRows + 1, BoardColumns + 1];
@@ -32,7 +33,7 @@ namespace CoCaro.Model
             MoveTime = 20;
             Moves = new List<string>();
             StartTime = new DateTime();
-            Winer = 0;
+            Winner = 0;
         }
 
         public ChessBoard(int id) : this()
