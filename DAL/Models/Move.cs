@@ -15,7 +15,7 @@ namespace CoCaro.DAL.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int GameId { get; set; }
-        public ChessType Type { get; set; }
+        //public ChessType Type { get; set; }
         public string Point { get; set; }
 
         public Game Game { get; set; }

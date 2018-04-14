@@ -9,6 +9,7 @@ namespace CoCaro.Model
     public interface IDataSource
     {
         ChessBoard CreateNewGame();
+        void EndGame(int id, int winner, int duration);
         void StoreMove(int id, string move);
         List<ChessBoard> GetHistory();
         ChessBoard GetGameRecord(int id);

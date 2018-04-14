@@ -15,18 +15,20 @@ namespace CoCaro.Presenter.PlayWithPlayer
 
         private ChessBoard _ChessBoard;
         private Chess LastMove;
+
         public PlayWithPlayerPresenter(IPlayWithPlayerView view, IDataSource dataSource)
         {
             this.view = view;
             this.view.Presenter = this;
             this.dataSource = dataSource;
         }
+
         public int CheckGame(ChessBoard chessBoard, int row, int column)
         {
             this._ChessBoard = chessBoard;
             this.LastMove = chessBoard.Chesses[row, column];
 
-            if(chessBoard.NumberOfMove == ChessBoard.BoardRows * ChessBoard.BoardColumns)
+            if (chessBoard.NumberOfMove == ChessBoard.BoardRows * ChessBoard.BoardColumns)
             {
                 return 0;
             }
@@ -43,7 +45,7 @@ namespace CoCaro.Presenter.PlayWithPlayer
             int count = 1;
             for (int i = 1; count < 5; i++, count++)
             {
-                if(LastMove.Column + i > ChessBoard.BoardColumns)
+                if (LastMove.Column + i > ChessBoard.BoardColumns)
                 {
                     break;
                 }
@@ -61,7 +63,7 @@ namespace CoCaro.Presenter.PlayWithPlayer
             {
                 for (int i = 1; count < 5; i++, count++)
                 {
-                    if(LastMove.Column - i < 1)
+                    if (LastMove.Column - i < 1)
                     {
                         break;
                     }
@@ -125,7 +127,7 @@ namespace CoCaro.Presenter.PlayWithPlayer
                 {
                     return false;
                 }
-            }            
+            }
         }
 
         public bool CheckReverseInclined()
@@ -171,7 +173,7 @@ namespace CoCaro.Presenter.PlayWithPlayer
                 {
                     return false;
                 }
-            }            
+            }
         }
 
         public bool CheckVertical()
@@ -215,11 +217,11 @@ namespace CoCaro.Presenter.PlayWithPlayer
                 {
                     return false;
                 }
-            }            
+            }
         }
 
         public ChessBoard CreateNewGame()
-        {                        
+        {
             return dataSource.CreateNewGame();
         }
 

@@ -42,7 +42,7 @@ namespace CoCaro.View.PlayWithPlayer
 
             Label timeLabel = new Label();
             timeLabel.Name = "lblTime";
-            timeLabel.Text = _ChessBoard.MoveTime.ToString();
+            timeLabel.Text = ChessBoard.MoveTime.ToString();
             timeLabel.Font = new Font("Arial", 16, FontStyle.Bold);
             timeLabel.ForeColor = Color.Green;
             timeLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -132,7 +132,7 @@ namespace CoCaro.View.PlayWithPlayer
             Label lblTime = this.Controls.Find("lblTime", false)[0] as Label;
             ProgressBar prgTime = this.Controls.Find("prgTime", false)[0] as ProgressBar;
 
-            lblTime.Text = _ChessBoard.MoveTime.ToString();
+            lblTime.Text = ChessBoard.MoveTime.ToString();
             prgTime.Value = 100;
         }
         private void EndGame(int result, bool isTimeUp)
@@ -250,7 +250,7 @@ namespace CoCaro.View.PlayWithPlayer
             label.Text = time.ToString();
 
             ProgressBar progressBar = this.Controls.Find("prgTime", false)[0] as ProgressBar;
-            progressBar.Value = 100 * time / _ChessBoard.MoveTime;
+            progressBar.Value = 100 * time / ChessBoard.MoveTime;
 
             if (time == 0)
             {

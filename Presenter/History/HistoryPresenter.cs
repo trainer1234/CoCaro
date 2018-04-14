@@ -17,6 +17,7 @@ namespace CoCaro.Presenter.History
         {
 
         }
+
         public HistoryPresenter(IHistoryView view, IDataSource dataSource)
         {
             this.view = view;

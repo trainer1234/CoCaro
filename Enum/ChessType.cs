@@ -8,7 +8,7 @@ namespace CoCaro.Enum
 {
     public enum ChessType : int
     {
-        Circle = 0, 
-        Cross = 1
+        Cross = 1,
+        Circle = 2,
     }
 }

@@ -13,12 +13,13 @@ namespace CoCaro.Model
         public static int BoardColumns { get; } = 20;
         public static int BoardPaddingLeft { get; } = 80;
         public static int BoardPaddingTop { get; } = 150;
+        public static int MoveTime { get; set; } = 15;
+
         public int Id { get; set; }
         public Chess[,] Chesses { get; set; }
         public int NumberOfMove { get; set; }
         public int TurnOwner { get; set; }
         public bool IsEnd { get; set; }    
-        public int MoveTime { get; set; }
         public List<string> Moves { get; set; }
         public int GameDuration { get; set; }
         public DateTime StartTime { get; set; }
