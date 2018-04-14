@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoCaro.DAL.Context;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace CoCaro.Model
     class DataSource : IDataSource
     {
         private List<ChessBoard> ChessBoards;
+        private CaroContext caroContext = new CaroContext();
 
         public DataSource()
         {
