@@ -225,6 +225,11 @@ namespace CoCaro.Presenter.PlayWithPlayer
             return dataSource.CreateNewGame();
         }
 
+        public void EndGame(int id, int winner, int duration)
+        {
+            dataSource.EndGame(id, winner, duration);
+        }
+
         public void StoreMove(int id, int row, int column)
         {
             string move = "";

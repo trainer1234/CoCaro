@@ -33,7 +33,7 @@ namespace CoCaro.Model
             IsEnd = false;
             MoveTime = 20;
             Moves = new List<string>();
-            StartTime = new DateTime();
+            StartTime = DateTime.Now;
             Winner = 0;
         }
 
