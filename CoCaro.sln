@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoCaro", "CoCaro.csproj", "{DC539F61-070D-44C8-A742-C04B6F6D2265}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoCaro.Test", "..\CoCaro.Test\CoCaro.Test.csproj", "{4795F2B2-8EE8-4D7E-821D-193D43ADCEA5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoCaro.Test", "CoCaro.Test\CoCaro.Test.csproj", "{C2CC511E-A42B-447A-90F9-31D655990523}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{DC539F61-070D-44C8-A742-C04B6F6D2265}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC539F61-070D-44C8-A742-C04B6F6D2265}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC539F61-070D-44C8-A742-C04B6F6D2265}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4795F2B2-8EE8-4D7E-821D-193D43ADCEA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4795F2B2-8EE8-4D7E-821D-193D43ADCEA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4795F2B2-8EE8-4D7E-821D-193D43ADCEA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4795F2B2-8EE8-4D7E-821D-193D43ADCEA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2CC511E-A42B-447A-90F9-31D655990523}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2CC511E-A42B-447A-90F9-31D655990523}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2CC511E-A42B-447A-90F9-31D655990523}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2CC511E-A42B-447A-90F9-31D655990523}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
