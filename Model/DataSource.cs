@@ -31,16 +31,17 @@ namespace CoCaro.Model
 
         public ChessBoard CreateNewGame()
         {
-            Game newGame = new Game
-            {
-                StartTime = DateTime.Now
-            };
-            caroContext.Games.Add(newGame);
-            caroContext.SaveChanges();
+            //Game newGame = new Game
+            //{
+            //    StartTime = DateTime.Now
+            //};
+            //caroContext.Games.Add(newGame);
+            //caroContext.SaveChanges();
 
-            ChessBoard chessBoard = new ChessBoard(newGame.Id);
-            //this.ChessBoards.Add(chessBoard);
+            //ChessBoard chessBoard = new ChessBoard(newGame.Id);            
 
+            ChessBoard chessBoard = new ChessBoard(this.ChessBoards.Count);
+            this.ChessBoards.Add(chessBoard);
             return chessBoard;
         }
 
@@ -99,12 +100,12 @@ namespace CoCaro.Model
         {
             try
             {
-                var currentGame = caroContext.Games.SingleOrDefault(game => game.Id == id);
+                //var currentGame = caroContext.Games.SingleOrDefault(game => game.Id == id);
 
-                currentGame.Winner = winner;
-                currentGame.Duration = duration;
+                //currentGame.Winner = winner;
+                //currentGame.Duration = duration;
 
-                caroContext.SaveChanges();
+                //caroContext.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -116,15 +117,15 @@ namespace CoCaro.Model
         {
             try
             {
-                Move newMove = new Move
-                {
-                    GameId = id,
-                    Point = move
-                };
-                caroContext.Moves.Add(newMove);
-                caroContext.SaveChanges();
+                //Move newMove = new Move
+                //{
+                //    GameId = id,
+                //    Point = move
+                //};
+                //caroContext.Moves.Add(newMove);
+                //caroContext.SaveChanges();
 
-                //this.ChessBoards.Single(x => x.Id == id).Moves.Add(move);
+                this.ChessBoards.Single(x => x.Id == id).Moves.Add(move);
             }
             catch (Exception ex)
             {

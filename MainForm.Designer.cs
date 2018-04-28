@@ -87,6 +87,7 @@
             this.Controls.Add(this.btnWatchRecord);
             this.Controls.Add(this.btnPlayWithPlayer);
             this.Controls.Add(this.btnPlayWithCom);
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cờ Carô";

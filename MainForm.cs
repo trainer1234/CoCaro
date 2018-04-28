@@ -1,4 +1,5 @@
 ﻿using CoCaro.View.History;
+using CoCaro.View.PlayWithCom;
 using CoCaro.View.PlayWithPlayer;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,8 @@ namespace CoCaro
 
         private void btnPlayWithCom_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Coming Soon!");
+            PlayWithComViewForm form = new PlayWithComViewForm();
+            form.Show();
         }
 
         private void btnPlayWithPlayer_Click(object sender, EventArgs e)
