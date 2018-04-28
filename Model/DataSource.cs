@@ -12,9 +12,11 @@ namespace CoCaro.Model
     public class DataSource : IDataSource
     {
         private CaroContext caroContext = new CaroContext();
+        private List<ChessBoard> ChessBoards;
 
         public DataSource()
         {
+            ChessBoards = new List<ChessBoard>();
             //this.ChessBoards.Add(new ChessBoard {
             //    Id = 1,
             //    Moves = new List<string>
