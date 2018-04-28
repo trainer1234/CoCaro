@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace CoCaro.Model
 {
-    class DataSource : IDataSource
+    public class DataSource : IDataSource
     {
-        private List<ChessBoard> ChessBoards;
         private CaroContext caroContext = new CaroContext();
+        private List<ChessBoard> ChessBoards;
 
         public DataSource()
         {
-            this.ChessBoards = new List<ChessBoard>();
+            ChessBoards = new List<ChessBoard>();
             //this.ChessBoards.Add(new ChessBoard {
             //    Id = 1,
             //    Moves = new List<string>
