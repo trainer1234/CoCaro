@@ -26,6 +26,12 @@ namespace CoCaro.View.PlayWithCom
 
         public void initBoard()
         {
+            this.Width = 2 * ChessBoard.BoardPaddingLeft +
+                ChessBoard.ChessSize * ChessBoard.BoardColumns;
+
+            this.Height = 2 * ChessBoard.BoardPaddingTop + 
+                ChessBoard.ChessSize * ChessBoard.BoardRows;
+
             _ChessBoard = Presenter.CreateNewGame();
 
             Label turnLabel = new Label();
@@ -64,7 +70,7 @@ namespace CoCaro.View.PlayWithCom
             {
                 Label label = new Label();
                 label.Text = ((char)('A' + i)).ToString();
-                label.Font = new Font("Arial", 14, FontStyle.Bold);
+                label.Font = new Font("Arial", 12, FontStyle.Bold);
                 label.TextAlign = ContentAlignment.MiddleCenter;
                 label.Height = ChessBoard.ChessSize;
                 label.Width = ChessBoard.ChessSize;
@@ -77,7 +83,7 @@ namespace CoCaro.View.PlayWithCom
             {
                 Label label = new Label();
                 label.Text = (i + 1).ToString();
-                label.Font = new Font("Arial", 14, FontStyle.Bold);
+                label.Font = new Font("Arial", 12, FontStyle.Bold);
                 label.TextAlign = ContentAlignment.MiddleCenter;
                 label.Height = ChessBoard.ChessSize;
                 label.Width = ChessBoard.ChessSize;
@@ -116,13 +122,13 @@ namespace CoCaro.View.PlayWithCom
             if (_ChessBoard.TurnOwner == 1)
             {
                 _ChessBoard.TurnOwner = 2;
-                lblTurn.Text = "Đến lượt O đi";
+                lblTurn.Text = "Đến lượt bạn đi";
                 lblTurn.ForeColor = Color.Orange;
             }
             else
             {
                 _ChessBoard.TurnOwner = 1;
-                lblTurn.Text = "Đến lượt X đi";
+                lblTurn.Text = "Đến lượt Computer đi";
                 lblTurn.ForeColor = Color.Blue;
             }
         }
@@ -161,6 +167,9 @@ namespace CoCaro.View.PlayWithCom
 
             timerTurn.Stop();
             timerGameDuration.Stop();
+
+            Label lblTurn = this.Controls.Find("lblTurn", false)[0] as Label;
+            lblTurn.Visible = false;
 
             Label label = new Label();
             label.Height = 30;
@@ -261,12 +270,28 @@ namespace CoCaro.View.PlayWithCom
 
         private void timer_Tick(object sender, EventArgs e)
         {
+            Label label = this.Controls.Find("lblTime", false)[0] as Label;
+            int time = Int16.Parse(label.Text) - 1;
 
+            label.Text = time.ToString();
+
+            ProgressBar progressBar = this.Controls.Find("prgTime", false)[0] as ProgressBar;
+            progressBar.Value = 100 * time / ChessBoard.MoveTime;
+
+            if (time == 0)
+            {
+                timerTurn.Stop();
+                EndGame(1, true);
+            }
+            else if (time < 10)
+            {
+                label.ForeColor = Color.Red;
+            }
         }
 
         private void timerGameDuration_Tick(object sender, EventArgs e)
         {
-
+            _ChessBoard.GameDuration++;
         }
     }
 }

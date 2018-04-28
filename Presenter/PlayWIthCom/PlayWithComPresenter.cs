@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using CoCaro.Model;
 using CoCaro.View.PlayWithCom;
 
@@ -237,6 +238,8 @@ namespace CoCaro.Presenter.PlayWIthCom
             string move = "";
             move += ((char)(column - 1 + 'A')).ToString();
             move += (row).ToString();
+            MessageBox.Show(move);
+            _ChessBoard.Moves.Add(move);
             dataSource.StoreMove(id, move);
         }
 
@@ -248,13 +251,11 @@ namespace CoCaro.Presenter.PlayWIthCom
             if (_ChessBoard.Moves.Count == 0)
             {
                 view.ComSetChess(ChessBoard.BoardRows / 2, ChessBoard.BoardColumns / 2);
-                //Danh_Co(_Ban_Co.NRow / 2 * O_Co._Height + 1, ChessBoard.BoardColumns / 2 * O_Co._Width + 1, g);
             }
             else
             {
                 KeyValuePair<int, int> location = Tim_Kiem_Nuoc_Di();
-                view.ComSetChess(location.Key, location.Value);                
-                //Danh_Co(_o_co.Location.X + 1, _o_co.Location.Y + 1, g);
+                view.ComSetChess(location.Key, location.Value);                                
             }
 
         }

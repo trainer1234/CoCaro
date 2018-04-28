@@ -36,7 +36,7 @@ namespace CoCaro.View.History.RecordReplay
         }
 
         public void initBoard(ChessBoard chessBoard)
-        {           
+        {                       
             Label turnLabel = new Label();
             turnLabel.Name = "lblTurn";
             turnLabel.Text = "Replay Game #" + (chessBoard.Id + 1);
@@ -57,7 +57,7 @@ namespace CoCaro.View.History.RecordReplay
             lbMoves.Width = 100;
             lbMoves.Height = 300;
             lbMoves.Location = new Point(rightControlX,
-                ChessBoard.BoardColumns / 2 * ChessBoard.ChessSize);
+                ChessBoard.BoardPaddingTop);
             lbMoves.Font = new Font(new FontFamily("Arial"), 12, FontStyle.Regular);
             for(int i = 0; i < chessBoard.Moves.Count; i++) 
             {
@@ -73,8 +73,7 @@ namespace CoCaro.View.History.RecordReplay
             btnPreviousMove.BackgroundImage = new Bitmap(Properties.Resources.up);
             btnPreviousMove.Font = new Font("Arial", 12, FontStyle.Regular);
             btnPreviousMove.Location = new Point(rightControlX,
-                ChessBoard.BoardColumns / 2 * ChessBoard.ChessSize
-                + lbMoves.Height + ChessBoard.ChessSize / 2);
+                lbMoves.Location.Y + lbMoves.Height + ChessBoard.ChessSize / 2);
             btnPreviousMove.Click += btnPreviousMove_Click;
             Controls.Add(btnPreviousMove);
 
@@ -85,8 +84,7 @@ namespace CoCaro.View.History.RecordReplay
             btnNextMove.BackgroundImage = new Bitmap(Properties.Resources.down);
             btnNextMove.Font = new Font("Arial", 12, FontStyle.Regular);
             btnNextMove.Location = new Point(rightControlX + btnPreviousMove.Width + 20,
-                ChessBoard.BoardColumns / 2 * ChessBoard.ChessSize
-                + lbMoves.Height + ChessBoard.ChessSize / 2);
+                lbMoves.Location.Y + lbMoves.Height + ChessBoard.ChessSize / 2);
             btnNextMove.Click += btnNextMove_Click;
             Controls.Add(btnNextMove);
 
@@ -96,8 +94,8 @@ namespace CoCaro.View.History.RecordReplay
             btnAutoPlay.Text = "Tự động";
             btnAutoPlay.Font = new Font("Arial", 12, FontStyle.Regular);
             btnAutoPlay.Location = new Point(rightControlX,
-                ChessBoard.BoardColumns / 2 * ChessBoard.ChessSize
-                + lbMoves.Height + (ChessBoard.ChessSize / 2) * 2 + 40);
+                btnNextMove.Location.Y + btnNextMove.Height
+                + ChessBoard.ChessSize / 2);
             btnAutoPlay.Click += btnAutoPlay_Click;
             Controls.Add(btnAutoPlay);
 
@@ -108,8 +106,7 @@ namespace CoCaro.View.History.RecordReplay
             btnStopAutoPlay.Text = "Dừng";
             btnStopAutoPlay.Font = new Font("Arial", 12, FontStyle.Regular);
             btnStopAutoPlay.Location = new Point(rightControlX,
-                ChessBoard.BoardColumns / 2 * ChessBoard.ChessSize
-                + lbMoves.Height + (ChessBoard.ChessSize / 2) * 3 + 40 * 2);
+                btnAutoPlay.Location.Y + btnAutoPlay.Height + ChessBoard.ChessSize / 2);
             btnStopAutoPlay.Enabled = false;
             btnStopAutoPlay.Click += btnStop_Click;
             Controls.Add(btnStopAutoPlay);            
@@ -118,7 +115,7 @@ namespace CoCaro.View.History.RecordReplay
             {
                 Label label = new Label();
                 label.Text = ((char)('A' + i)).ToString();
-                label.Font = new Font("Arial", 14, FontStyle.Bold);
+                label.Font = new Font("Arial", 12, FontStyle.Bold);
                 label.TextAlign = ContentAlignment.MiddleCenter;
                 label.Height = ChessBoard.ChessSize;
                 label.Width = ChessBoard.ChessSize;
@@ -131,7 +128,7 @@ namespace CoCaro.View.History.RecordReplay
             {
                 Label label = new Label();
                 label.Text = (i + 1).ToString();
-                label.Font = new Font("Arial", 14, FontStyle.Bold);
+                label.Font = new Font("Arial", 12, FontStyle.Bold);
                 label.TextAlign = ContentAlignment.MiddleCenter;
                 label.Height = ChessBoard.ChessSize;
                 label.Width = ChessBoard.ChessSize;
@@ -155,7 +152,12 @@ namespace CoCaro.View.History.RecordReplay
 
                     chessBoard.Chesses[i, j] = new Chess(j, i, button.Location, 0);
                 }
-            }            
+            }
+
+            this.Width = ChessBoard.BoardPaddingLeft +
+                rightControlX + lbMoves.Width;
+            this.Height = 2 * ChessBoard.BoardPaddingTop +
+                ChessBoard.ChessSize * ChessBoard.BoardRows;
         }
 
         private void ClearBoard()
@@ -240,7 +242,7 @@ namespace CoCaro.View.History.RecordReplay
             {
                 string move = lbMoves.Items[i].ToString().Split('.')[1].Trim();
                 string column = (move[0] - 'A' + 1).ToString();
-                string row = (Int16.Parse((move[1]).ToString())).ToString();
+                string row = (Int16.Parse(move.Substring(1))).ToString();
                 Button btnChess = Controls.Find("Chess_" +
                         row.ToString() + "_" + column.ToString(), false)[0] as Button;
 

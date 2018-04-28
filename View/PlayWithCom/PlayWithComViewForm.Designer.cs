@@ -36,17 +36,22 @@
             // timerTurn
             // 
             this.timerTurn.Interval = 1000;
+            this.timerTurn.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // timerGameDuration
             // 
             this.timerGameDuration.Interval = 1000;
+            this.timerGameDuration.Tick += new System.EventHandler(this.timerGameDuration_Tick);
             // 
             // PlayWithComViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(864, 961);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "PlayWithComViewForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PlayWithComViewForm";
             this.Load += new System.EventHandler(this.PlayWithComViewForm_Load);
             this.ResumeLayout(false);

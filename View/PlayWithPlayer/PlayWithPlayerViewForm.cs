@@ -26,6 +26,12 @@ namespace CoCaro.View.PlayWithPlayer
 
         public void initBoard()
         {
+            this.Width = 2 * ChessBoard.BoardPaddingLeft +
+                ChessBoard.ChessSize * ChessBoard.BoardColumns;
+
+            this.Height = 2 * ChessBoard.BoardPaddingTop +
+                ChessBoard.ChessSize * ChessBoard.BoardRows;
+
             _ChessBoard = Presenter.CreateNewGame();
 
             Label turnLabel = new Label();
@@ -64,7 +70,7 @@ namespace CoCaro.View.PlayWithPlayer
             {
                 Label label = new Label();
                 label.Text = ((char)('A' + i)).ToString();
-                label.Font = new Font("Arial", 14, FontStyle.Bold);
+                label.Font = new Font("Arial", 12, FontStyle.Bold);
                 label.TextAlign = ContentAlignment.MiddleCenter;
                 label.Height = ChessBoard.ChessSize;
                 label.Width = ChessBoard.ChessSize;
@@ -77,7 +83,7 @@ namespace CoCaro.View.PlayWithPlayer
             {
                 Label label = new Label();
                 label.Text = (i + 1).ToString();
-                label.Font = new Font("Arial", 14, FontStyle.Bold);
+                label.Font = new Font("Arial", 12, FontStyle.Bold);
                 label.TextAlign = ContentAlignment.MiddleCenter;
                 label.Height = ChessBoard.ChessSize;
                 label.Width = ChessBoard.ChessSize;
@@ -139,6 +145,9 @@ namespace CoCaro.View.PlayWithPlayer
         private void EndGame(int result, bool isTimeUp)
         {
             _ChessBoard.IsEnd = true;
+
+            Label lblTurn = this.Controls.Find("lblTurn", false)[0] as Label;
+            lblTurn.Visible = false;
 
             timerTurn.Stop();
             timerGameDuration.Stop();

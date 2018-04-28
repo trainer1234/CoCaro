@@ -8,7 +8,7 @@ namespace CoCaro.Model
 {
     public class ChessBoard
     {
-        public static int ChessSize { get; } = 35;
+        public static int ChessSize { get; } = 30;
         public static int BoardRows { get; } = 20;
         public static int BoardColumns { get; } = 20;
         public static int BoardPaddingLeft { get; } = 80;
