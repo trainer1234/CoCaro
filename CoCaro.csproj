@@ -89,6 +89,8 @@
     <Compile Include="Presenter\History\IHistoryPresenter.cs" />
     <Compile Include="Presenter\History\RecordReplay\IRecordReplayPresenter.cs" />
     <Compile Include="Presenter\History\RecordReplay\RecordReplayPresenter.cs" />
+    <Compile Include="Presenter\PlayWIthCom\IPlayWithComPresenter.cs" />
+    <Compile Include="Presenter\PlayWIthCom\PlayWithComPresenter.cs" />
     <Compile Include="Presenter\PlayWithPlayer\IPlayWithPlayerPresenter.cs" />
     <Compile Include="Presenter\PlayWithPlayer\PlayWithPlayerPresenter.cs" />
     <Compile Include="Program.cs" />
@@ -112,6 +114,13 @@
     </Compile>
     <Compile Include="View\History\Record\RecordViewUserControl.Designer.cs">
       <DependentUpon>RecordViewUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PlayWithCom\IPlayWithComView.cs" />
+    <Compile Include="View\PlayWithCom\PlayWithComViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PlayWithCom\PlayWithComViewForm.Designer.cs">
+      <DependentUpon>PlayWithComViewForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\PlayWithPlayer\IPlayWithPlayerView.cs" />
     <Compile Include="View\PlayWithPlayer\PlayWithPlayerViewForm.cs">
@@ -145,6 +154,9 @@
     <EmbeddedResource Include="View\History\Record\RecordViewUserControl.resx">
       <DependentUpon>RecordViewUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\PlayWithCom\PlayWithComViewForm.resx">
+      <DependentUpon>PlayWithComViewForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\PlayWithPlayer\PlayWithPlayerViewForm.resx">
       <DependentUpon>PlayWithPlayerViewForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -166,8 +178,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Presenter\History\Record\" />
-    <Folder Include="Presenter\PlayWIthCom\" />
-    <Folder Include="View\PlayWithCom\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\round.png" />
