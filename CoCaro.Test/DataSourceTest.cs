@@ -22,12 +22,17 @@ namespace CoCaro.Test
 
         DataSource systemUnderTest;
 
+        List<Game> gameMockData;
+
         [SetUp]
         public void SetUp()
         {
             mockCaroContext = new Mock<CaroContext>();
             mockDataSource = new Mock<IDataSource>();
             gameMockSet = new Mock<DbSet<Game>>();
+
+            SeedData seedData = new SeedData();
+            gameMockData = seedData.SeedGameData();
         }
 
         //[Test]
@@ -121,8 +126,7 @@ namespace CoCaro.Test
         [TestCaseSource(typeof(TestData), "GetGameRecordData")]
         public void GetGameRecord_Always_ReturnValues(int id)
         {
-            SeedData seedData = new SeedData();
-            var data = seedData.SeedGameData().AsQueryable();
+            var data = gameMockData.AsQueryable();
 
             // Arrange
             gameMockSet.As<IQueryable<Game>>().Setup(m => m.Provider).Returns(data.Provider);
@@ -154,6 +158,45 @@ namespace CoCaro.Test
             {
                 Assert.AreEqual(expectedResult.Moves[i].Point, gameRecord.Moves[i]);
             }
+        }
+
+        [Test]
+        public void CreateNewGame_Always_Works()
+        {
+            // Arrange
+            mockCaroContext.Setup(m => m.Games).Returns(gameMockSet.Object);
+            systemUnderTest = new DataSource(mockCaroContext.Object);
+
+            // Act
+            var newChessBoard = systemUnderTest.CreateNewGame();
+
+            // Assert
+            gameMockSet.Verify(m => m.Add(It.IsAny<Game>()), Times.Once());
+            mockCaroContext.Verify(m => m.SaveChanges(), Times.Once());
+
+            Assert.That(newChessBoard, !Is.Null);
+        }
+
+        public void StoreMove_Always_Works(int id, string move)
+        {
+            var data = gameMockData.AsQueryable();
+
+            // Arrange
+            gameMockSet.As<IQueryable<Game>>().Setup(m => m.Provider).Returns(data.Provider);
+            gameMockSet.As<IQueryable<Game>>().Setup(m => m.Expression).Returns(data.Expression);
+            gameMockSet.As<IQueryable<Game>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            gameMockSet.As<IQueryable<Game>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+
+            gameMockSet.Setup(m => m.Include("Moves")).Returns(gameMockSet.Object);
+
+            mockCaroContext.Setup(m => m.Games).Returns(gameMockSet.Object);
+            systemUnderTest = new DataSource(mockCaroContext.Object);
+
+            // Act
+            systemUnderTest.StoreMove(id, move);
+
+            // Assert
+            
         }
     }
 }

@@ -45,7 +45,7 @@ namespace CoCaro.Test.Data
                 new Move { Id = 24, GameId = 3, Point = "B3" },
                 new Move { Id = 25, GameId = 3, Point = "A4" },
                 new Move { Id = 26, GameId = 3, Point = "B4" },
-                new Move { Id = 27, GameId = 3, Point = "A5" }
+                new Move { Id = 27, GameId = 3, Point = "C5" }
             };
 
             return new List<Game>

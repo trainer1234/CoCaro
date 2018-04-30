@@ -1,5 +1,6 @@
 ﻿using CoCaro.DAL.Models;
 using CoCaro.Model;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -171,6 +172,25 @@ namespace CoCaro.Test
                 yield return 2;
                 yield return 3;
             }
+        }
+
+        public static IEnumerable<TestCaseData> StoreCoincideMoveData()
+        {
+            yield return new TestCaseData(3, "A1");
+            yield return new TestCaseData(1, "A2");
+        }
+
+        public static IEnumerable<TestCaseData> StoreNormalsMoveData()
+        {
+            yield return new TestCaseData(3, "A5");
+            yield return new TestCaseData(3, "A10");
+            yield return new TestCaseData(3, "B9");
+        }
+
+        public static IEnumerable<TestCaseData> StoreWrongFormatMove()
+        {
+            yield return new TestCaseData(3, "jkasjkdfjksdjf");
+            yield return new TestCaseData(100, "999999");
         }
     }
 }

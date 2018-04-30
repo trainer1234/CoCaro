@@ -12,7 +12,7 @@ namespace CoCaro.Model
         public static int BoardRows { get; } = 20;
         public static int BoardColumns { get; } = 20;
         public static int BoardPaddingLeft { get; } = 80;
-        public static int BoardPaddingTop { get; } = 150;
+        public static int BoardPaddingTop { get; } = 110;
         public static int MoveTime { get; set; } = 15;
 
         public int Id { get; set; }
