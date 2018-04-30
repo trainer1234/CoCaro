@@ -11,12 +11,13 @@ namespace CoCaro.Model
 {
     public class DataSource : IDataSource
     {
-        private CaroContext caroContext = new CaroContext();
+        private CaroContext caroContext;
         private List<ChessBoard> ChessBoards;
 
-        public DataSource()
+        public DataSource(CaroContext caroContext)
         {
             ChessBoards = new List<ChessBoard>();
+            this.caroContext = caroContext;
             //this.ChessBoards.Add(new ChessBoard {
             //    Id = 1,
             //    Moves = new List<string>
@@ -74,9 +75,10 @@ namespace CoCaro.Model
         {
             var chessboards = new List<ChessBoard>();
 
-            var games = caroContext.Games.Include(game => game.Moves).OrderByDescending(game => game.StartTime).ToList();
-            if (games != null && games.Count > 0)
+            var games = caroContext.Games.Include(game => game.Moves);
+            if (games != null)
             {
+                games = games.OrderByDescending(game => game.StartTime);
                 foreach (var match in games)
                 {
                     var chessboard = new ChessBoard

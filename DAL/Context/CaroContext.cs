@@ -15,8 +15,8 @@ namespace CoCaro.DAL.Context
 
         }
 
-        public DbSet<Move> Moves { get; set; }
-        public DbSet<Game> Games { get; set; }
+        public virtual DbSet<Move> Moves { get; set; }
+        public virtual DbSet<Game> Games { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

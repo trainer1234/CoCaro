@@ -21,7 +21,7 @@ namespace CoCaro.Test
         }
 
         [SetUp]
-        public void SetUp()
+        public virtual void SetUp()
         {
             CreateMockRepository();
             CreateMocks();

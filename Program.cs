@@ -1,4 +1,5 @@
-﻿using CoCaro.Model;
+﻿using CoCaro.DAL.Context;
+using CoCaro.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,8 @@ namespace CoCaro
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            DataSource = new DataSource();
+            CaroContext caroContext = new CaroContext();
+            DataSource = new DataSource(caroContext);
 
             Application.Run(new MainForm());
         }

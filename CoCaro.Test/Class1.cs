@@ -13,7 +13,7 @@ namespace CoCaro.Test
         [Test]
         public void OnePlusOneEqualsTwo()
         {
-            Assert.AreEqual(1 + 1, 3);
+            Assert.AreEqual(1 + 1, 2);
         }
     }
 }
