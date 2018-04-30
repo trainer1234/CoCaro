@@ -50,11 +50,12 @@ namespace CoCaro.Model
 
         public ChessBoard GetGameRecord(int id)
         {
-            var currentGame = caroContext.Games.Include(game => game.Moves).SingleOrDefault(game => game.Id == id);
+            var games = caroContext.Games.Include(game => game.Moves);
 
             ChessBoard chessboard = null;
-            if (currentGame != null)
+            if (games != null)
             {
+                var currentGame = games.SingleOrDefault(game => game.Id == id);
                 chessboard = new ChessBoard
                 {
                     Id = currentGame.Id,

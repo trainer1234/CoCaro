@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="DataSourceTest.cs" />
+    <Compile Include="Data\SeedData.cs" />
     <Compile Include="MockCaroContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestBase.cs" />

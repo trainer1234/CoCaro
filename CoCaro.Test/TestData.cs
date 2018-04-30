@@ -155,5 +155,22 @@ namespace CoCaro.Test
             }
         }
 
+        public static IEnumerable<IEnumerable<Game>> GetEmptyGameRecordData
+        {
+            get
+            {
+                yield return new List<Game>();
+            }
+        }
+
+        public static IEnumerable<int> GetGameRecordData
+        {
+            get
+            {
+                yield return 1;
+                yield return 2;
+                yield return 3;
+            }
+        }
     }
 }
