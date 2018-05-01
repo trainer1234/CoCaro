@@ -60,8 +60,7 @@ namespace CoCaro.Model
                 {
                     Id = currentGame.Id,
                     GameDuration = currentGame.Duration,
-                    Moves = currentGame.Moves.Select(move => move.Point).ToList(),
-                    NumberOfMove = currentGame.Moves.Count,
+                    Moves = currentGame.Moves.Select(move => move.Point).ToList(),                    
                     StartTime = currentGame.StartTime,
                     Winner = currentGame.Winner
                 };
@@ -87,8 +86,7 @@ namespace CoCaro.Model
                         Id = match.Id,
                         IsEnd = true,
                         GameDuration = match.Duration,
-                        StartTime = match.StartTime,
-                        NumberOfMove = match.Moves.Count,
+                        StartTime = match.StartTime,                        
                         Moves = match.Moves.Select(move => move.Point).ToList(),
                         Winner = match.Winner
                     };
@@ -136,6 +134,23 @@ namespace CoCaro.Model
             {
                 throw;
             }
+        }
+
+        public ChessBoard[] GetAllCoTheGameLevels()
+        {
+            ChessBoard[] chessBoards = new ChessBoard[20];
+
+            Chess[,] chesses = ChessBoard.initChesses();
+            chesses[10, 10] = new Chess(10, 10, 1, true);
+            chesses[10, 11] = new Chess(10, 11, 2, true);
+            chesses[11, 10] = new Chess(11, 10, 1, true);
+            chesses[10, 12] = new Chess(10, 12, 2, true);
+            chesses[12, 10] = new Chess(12, 10, 1, true);
+            chesses[10, 13] = new Chess(10, 13, 2, true);
+
+            chessBoards[0] = new ChessBoard(1, chesses, 5);
+            chessBoards[0].Moves.AddRange(new string[] { "J10", "J10", "J10", "J10", "J10", "J10" });
+            return chessBoards;
         }
     }
 }

@@ -85,6 +85,8 @@
     <Compile Include="Model\ChessBoard.cs" />
     <Compile Include="Model\DataSource.cs" />
     <Compile Include="Model\IDataSource.cs" />
+    <Compile Include="Presenter\CoThe\CoThePresenter.cs" />
+    <Compile Include="Presenter\CoThe\ICoThePresenter.cs" />
     <Compile Include="Presenter\History\HistoryPresenter.cs" />
     <Compile Include="Presenter\History\IHistoryPresenter.cs" />
     <Compile Include="Presenter\History\RecordReplay\IRecordReplayPresenter.cs" />
@@ -95,6 +97,13 @@
     <Compile Include="Presenter\PlayWithPlayer\PlayWithPlayerPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\CoThe\CoTheViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CoThe\CoTheViewForm.Designer.cs">
+      <DependentUpon>CoTheViewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CoThe\ICoTheView.cs" />
     <Compile Include="View\History\HistoryViewForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +154,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\CoThe\CoTheViewForm.resx">
+      <DependentUpon>CoTheViewForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\History\HistoryViewForm.resx">
       <DependentUpon>HistoryViewForm.cs</DependentUpon>
     </EmbeddedResource>

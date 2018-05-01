@@ -16,19 +16,17 @@ namespace CoCaro.Model
         public static int MoveTime { get; set; } = 15;
 
         public int Id { get; set; }
-        public Chess[,] Chesses { get; set; }
-        public int NumberOfMove { get; set; }
+        public Chess[,] Chesses { get; set; }        
         public int TurnOwner { get; set; }
         public bool IsEnd { get; set; }    
         public List<string> Moves { get; set; }
         public int GameDuration { get; set; }
         public DateTime StartTime { get; set; }
         public int Winner { get; set; }
-
+        public int LimitedMoves { get; set; }
         public ChessBoard()
         {
-            Chesses = new Chess[BoardRows + 1, BoardColumns + 1];
-            NumberOfMove = 0;
+            Chesses = initChesses();            
             TurnOwner = 1;
             IsEnd = false;
             MoveTime = 20;
@@ -40,6 +38,26 @@ namespace CoCaro.Model
         public ChessBoard(int id) : this()
         {
             this.Id = id;
+        }
+
+        public ChessBoard(int id, Chess[,] initMoves, int limitedMoves) : this()
+        {
+            this.Id = id;
+            this.Chesses = initMoves;
+            this.LimitedMoves = limitedMoves;
+        }
+
+        public static Chess[,] initChesses()
+        {
+            Chess[,] chess = new Chess[BoardRows + 1, BoardColumns + 1];
+            for(int i = 1; i <= BoardRows; i++)
+            {
+                for(int j = 1; j <= BoardColumns; j++)
+                {
+                    chess[i, j] = new Chess(j, i, 0);
+                }
+            }
+            return chess;
         }
     }
 }

@@ -13,5 +13,6 @@ namespace CoCaro.Model
         void StoreMove(int id, string move);
         List<ChessBoard> GetHistory();
         ChessBoard GetGameRecord(int id);
+        ChessBoard[] GetAllCoTheGameLevels();
     }
 }
