@@ -180,7 +180,7 @@ namespace CoCaro.Test
             yield return new TestCaseData(1, "A2");
         }
 
-        public static IEnumerable<TestCaseData> StoreNormalsMoveData()
+        public static IEnumerable<TestCaseData> StoreNormalMoveData()
         {
             yield return new TestCaseData(3, "A5");
             yield return new TestCaseData(3, "A10");

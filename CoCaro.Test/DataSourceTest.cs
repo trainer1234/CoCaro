@@ -19,10 +19,12 @@ namespace CoCaro.Test
         Mock<IDataSource> mockDataSource;
         Mock<CaroContext> mockCaroContext;
         Mock<DbSet<Game>> gameMockSet;
+        Mock<DbSet<Move>> moveMockSet;
 
         DataSource systemUnderTest;
 
         List<Game> gameMockData;
+        List<Move> moveMockData;
 
         [SetUp]
         public void SetUp()
@@ -30,9 +32,11 @@ namespace CoCaro.Test
             mockCaroContext = new Mock<CaroContext>();
             mockDataSource = new Mock<IDataSource>();
             gameMockSet = new Mock<DbSet<Game>>();
+            moveMockSet = new Mock<DbSet<Move>>();
 
             SeedData seedData = new SeedData();
             gameMockData = seedData.SeedGameData();
+            moveMockData = seedData.SeedMoveData();
         }
 
         //[Test]
@@ -76,7 +80,7 @@ namespace CoCaro.Test
             mockCaroContext.Setup(c => c.Games).Returns(gameMockSet.Object);
             
             systemUnderTest = new DataSource(mockCaroContext.Object);
-            var expectedResult = data.ToList();
+            var expectedResult = data.OrderByDescending(game => game.StartTime).ToList();
 
             // Act
             var historyData = systemUnderTest.GetHistory();
@@ -85,13 +89,15 @@ namespace CoCaro.Test
             mockDataSource.VerifyAll();
 
             Assert.That(historyData, !Is.Empty);
-            Assert.AreEqual(games.Count, historyData.Count);
+            Assert.AreEqual(games.Count, historyData.Count, "Wrong number of history data");
             for (int i = 0; i < expectedResult.Count; i++)
             {
-                Assert.AreEqual(expectedResult[i].Id, historyData[i].Id);
-                Assert.AreEqual(expectedResult[i].Winner, historyData[i].Winner);
-                Assert.AreEqual(expectedResult[i].Duration, historyData[i].GameDuration);
-                Assert.AreEqual(expectedResult[i].StartTime, historyData[i].StartTime);                
+
+                Assert.AreEqual(expectedResult[i].Id, historyData[i].Id, "Wrong id " + i.ToString());
+                Assert.AreEqual(expectedResult[i].Winner, historyData[i].Winner, "Wrong winner " + i.ToString());
+                Assert.AreEqual(expectedResult[i].Duration, historyData[i].GameDuration, "Wrong game duration " + i.ToString());
+                Assert.AreEqual(expectedResult[i].StartTime, historyData[i].StartTime, "Wrong start time " + i.ToString());
+
                 for (int j = 0; j < expectedResult[i].Moves.Count; j++)
                 {
                     Assert.AreEqual(expectedResult[i].Moves[j].Point, historyData[i].Moves[j]);
@@ -148,10 +154,12 @@ namespace CoCaro.Test
             mockDataSource.VerifyAll();
 
             Assert.That(gameRecord, !Is.Null);
-            Assert.AreEqual(expectedResult.Id, gameRecord.Id);
-            Assert.AreEqual(expectedResult.Winner, gameRecord.Winner);
-            Assert.AreEqual(expectedResult.StartTime, gameRecord.StartTime);
-            Assert.AreEqual(expectedResult.Duration, gameRecord.GameDuration);            
+
+            Assert.AreEqual(expectedResult.Id, gameRecord.Id, "Wrong Id");
+            Assert.AreEqual(expectedResult.Winner, gameRecord.Winner, "Wrong winner");
+            Assert.AreEqual(expectedResult.StartTime, gameRecord.StartTime, "Wrong start time");
+            Assert.AreEqual(expectedResult.Duration, gameRecord.GameDuration, "Wrong Duration");
+
             for (int i = 0; i < expectedResult.Moves.Count; i++)
             {
                 Assert.AreEqual(expectedResult.Moves[i].Point, gameRecord.Moves[i]);
@@ -174,27 +182,31 @@ namespace CoCaro.Test
 
             Assert.That(newChessBoard, !Is.Null);
         }
-
+        
+        [TestCaseSource(typeof(TestData), "StoreNormalMoveData")]
         public void StoreMove_Always_Works(int id, string move)
         {
-            var data = gameMockData.AsQueryable();
+            var data = moveMockData.AsQueryable();
 
             // Arrange
-            gameMockSet.As<IQueryable<Game>>().Setup(m => m.Provider).Returns(data.Provider);
-            gameMockSet.As<IQueryable<Game>>().Setup(m => m.Expression).Returns(data.Expression);
-            gameMockSet.As<IQueryable<Game>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            gameMockSet.As<IQueryable<Game>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            moveMockSet.As<IQueryable<Move>>().Setup(m => m.Provider).Returns(data.Provider);
+            moveMockSet.As<IQueryable<Move>>().Setup(m => m.Expression).Returns(data.Expression);
+            moveMockSet.As<IQueryable<Move>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            moveMockSet.As<IQueryable<Move>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
 
-            gameMockSet.Setup(m => m.Include("Moves")).Returns(gameMockSet.Object);
+            //gameMockSet.Setup(m => m.Include("Moves")).Returns(gameMockSet.Object);
 
-            mockCaroContext.Setup(m => m.Games).Returns(gameMockSet.Object);
+            mockCaroContext.Setup(m => m.Moves).Returns(moveMockSet.Object);
             systemUnderTest = new DataSource(mockCaroContext.Object);
-
+            
             // Act
             systemUnderTest.StoreMove(id, move);
 
             // Assert
-            
+            moveMockSet.Verify(m => m.Add(It.IsAny<Move>()), Times.Once());
+            mockCaroContext.Verify(m => m.SaveChanges(), Times.Once());
         }
+
+
     }
 }

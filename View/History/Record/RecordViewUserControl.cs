@@ -28,7 +28,7 @@ namespace CoCaro.View.History.Record
 
         private void RecordViewUserControl_Load(object sender, EventArgs e)
         {
-            lblId.Text = "#" + (this._ChessBoard.Id + 1).ToString();
+            lblId.Text = "#" + (this._ChessBoard.Id).ToString();
             lblDuration.Text = this._ChessBoard.GameDuration.ToString() + "s";
             lblStartTime.Text = this._ChessBoard.StartTime.ToLongTimeString();
             if(this._ChessBoard.Winner == 1)
