@@ -29,7 +29,7 @@ namespace CoCaro.Presenter.PlayWIthCom
             this._ChessBoard = chessBoard;
             this.LastMove = chessBoard.Chesses[row, column];
 
-            if (chessBoard.Moves.Count == ChessBoard.BoardRows * ChessBoard.BoardColumns)
+            if (chessBoard.Moves.Count== ChessBoard.BoardRows * ChessBoard.BoardColumns)
             {
                 return 0;
             }

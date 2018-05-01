@@ -152,5 +152,20 @@ namespace CoCaro.Model
             chessBoards[0].Moves.AddRange(new string[] { "J10", "J10", "J10", "J10", "J10", "J10" });
             return chessBoards;
         }
+
+        public void SaveCoTheLevel(ChessBoard gameLevel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddCoTheLevel(ChessBoard gameLevel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteCoTheLevel(int gameLevelId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

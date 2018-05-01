@@ -14,5 +14,8 @@ namespace CoCaro.Model
         List<ChessBoard> GetHistory();
         ChessBoard GetGameRecord(int id);
         ChessBoard[] GetAllCoTheGameLevels();
+        void SaveCoTheLevel(ChessBoard gameLevel);
+        void AddCoTheLevel(ChessBoard gameLevel);
+        void DeleteCoTheLevel(int gameLevelId);
     }
 }

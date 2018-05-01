@@ -91,8 +91,7 @@ namespace CoCaro.Test
                 Assert.AreEqual(expectedResult[i].Id, historyData[i].Id);
                 Assert.AreEqual(expectedResult[i].Winner, historyData[i].Winner);
                 Assert.AreEqual(expectedResult[i].Duration, historyData[i].GameDuration);
-                Assert.AreEqual(expectedResult[i].StartTime, historyData[i].StartTime);
-                Assert.AreEqual(expectedResult[i].Moves.Count, historyData[i].NumberOfMove);
+                Assert.AreEqual(expectedResult[i].StartTime, historyData[i].StartTime);                
                 for (int j = 0; j < expectedResult[i].Moves.Count; j++)
                 {
                     Assert.AreEqual(expectedResult[i].Moves[j].Point, historyData[i].Moves[j]);
@@ -152,8 +151,7 @@ namespace CoCaro.Test
             Assert.AreEqual(expectedResult.Id, gameRecord.Id);
             Assert.AreEqual(expectedResult.Winner, gameRecord.Winner);
             Assert.AreEqual(expectedResult.StartTime, gameRecord.StartTime);
-            Assert.AreEqual(expectedResult.Duration, gameRecord.GameDuration);
-            Assert.AreEqual(expectedResult.Moves.Count, gameRecord.NumberOfMove);
+            Assert.AreEqual(expectedResult.Duration, gameRecord.GameDuration);            
             for (int i = 0; i < expectedResult.Moves.Count; i++)
             {
                 Assert.AreEqual(expectedResult.Moves[i].Point, gameRecord.Moves[i]);
