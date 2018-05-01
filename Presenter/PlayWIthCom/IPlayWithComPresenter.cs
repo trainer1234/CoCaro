@@ -18,6 +18,6 @@ namespace CoCaro.Presenter.PlayWIthCom
         bool CheckInclined();
         bool CheckReverseInclined();
 
-        void StartCom();
+        void ComputerMove(ChessBoard chessBoard);
     }
 }

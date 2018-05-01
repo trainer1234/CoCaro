@@ -1,4 +1,5 @@
-﻿using CoCaro.View.History;
+﻿using CoCaro.View.CoThe;
+using CoCaro.View.History;
 using CoCaro.View.PlayWithCom;
 using CoCaro.View.PlayWithPlayer;
 using System;
@@ -35,6 +36,12 @@ namespace CoCaro
         private void btnWatchRecord_Click(object sender, EventArgs e)
         {
             HistoryViewForm form = new HistoryViewForm();
+            form.Show();
+        }
+
+        private void btnCoThe_Click(object sender, EventArgs e)
+        {
+            CoTheViewForm form = new CoTheViewForm();
             form.Show();
         }
 

@@ -150,7 +150,7 @@ namespace CoCaro.View.History.RecordReplay
                     button.BackgroundImageLayout = ImageLayout.Stretch;
                     Controls.Add(button);
 
-                    chessBoard.Chesses[i, j] = new Chess(j, i, button.Location, 0);
+                    chessBoard.Chesses[i, j] = new Chess(j, i, 0);
                 }
             }
 

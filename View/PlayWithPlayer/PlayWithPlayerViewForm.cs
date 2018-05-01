@@ -106,7 +106,7 @@ namespace CoCaro.View.PlayWithPlayer
                     button.BackgroundImageLayout = ImageLayout.Stretch;
                     Controls.Add(button);
 
-                    _ChessBoard.Chesses[i, j] = new Chess(j, i, button.Location, 0);
+                    _ChessBoard.Chesses[i, j] = new Chess(j, i, 0);
                 }
             }
 
@@ -232,9 +232,7 @@ namespace CoCaro.View.PlayWithPlayer
             else
             {
                 ((Button)sender).BackgroundImage = new Bitmap(Properties.Resources.round);
-            }
-
-            _ChessBoard.NumberOfMove++;
+            }            
 
             Presenter.StoreMove(this._ChessBoard.Id, row, column);
             int result = Presenter.CheckGame(_ChessBoard, row, column);

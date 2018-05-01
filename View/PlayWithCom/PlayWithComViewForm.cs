@@ -24,6 +24,11 @@ namespace CoCaro.View.PlayWithCom
             Presenter = new PlayWithComPresenter(this, Program.DataSource);
         }
 
+        public PlayWithComViewForm(ChessBoard coThe) : this()
+        {
+            this._ChessBoard = coThe;
+        }
+
         public void initBoard()
         {
             this.Width = 2 * ChessBoard.BoardPaddingLeft +
@@ -106,7 +111,7 @@ namespace CoCaro.View.PlayWithCom
                     button.BackgroundImageLayout = ImageLayout.Stretch;
                     Controls.Add(button);
 
-                    _ChessBoard.Chesses[i, j] = new Chess(j, i, button.Location, 0);
+                    _ChessBoard.Chesses[i, j] = new Chess(j, i, 0);
                 }
             }
 
@@ -226,16 +231,144 @@ namespace CoCaro.View.PlayWithCom
             MessageBox.Show(s);
         }
 
+        private void initBoardCoThe()
+        {
+            this.Width = 2 * ChessBoard.BoardPaddingLeft +
+                ChessBoard.ChessSize * ChessBoard.BoardColumns;
+
+            this.Height = 2 * ChessBoard.BoardPaddingTop +
+                ChessBoard.ChessSize * ChessBoard.BoardRows;            
+
+            Label turnLabel = new Label();
+            turnLabel.Name = "lblTurn";
+
+            if(_ChessBoard.TurnOwner == 1)
+            {
+                turnLabel.Text = "Đến lượt máy đi";
+            }
+            else
+            {
+                turnLabel.Text = "Đến lượt bạn đi";
+            }
+            
+            turnLabel.Font = new Font("Arial", 16, FontStyle.Bold);
+            turnLabel.ForeColor = Color.Blue;
+            turnLabel.TextAlign = ContentAlignment.MiddleCenter;
+            turnLabel.Width = this.Width;
+            turnLabel.Height = 30;
+            turnLabel.Location = new Point(0,
+                ChessBoard.BoardPaddingTop - ChessBoard.ChessSize * 3);
+            Controls.Add(turnLabel);
+
+            Label timeLabel = new Label();
+            timeLabel.Name = "lblTime";
+            timeLabel.Text = ChessBoard.MoveTime.ToString();
+            timeLabel.Font = new Font("Arial", 16, FontStyle.Bold);
+            timeLabel.ForeColor = Color.Green;
+            timeLabel.TextAlign = ContentAlignment.MiddleCenter;
+            timeLabel.Width = 40;
+            timeLabel.Height = 30;
+            timeLabel.Location = new Point(ChessBoard.BoardPaddingLeft,
+                ChessBoard.BoardPaddingTop - ChessBoard.ChessSize * 2);
+            Controls.Add(timeLabel);
+
+            ProgressBar progressBar = new ProgressBar();
+            progressBar.Name = "prgTime";
+            progressBar.Location = new Point(ChessBoard.BoardPaddingLeft + timeLabel.Width,
+                ChessBoard.BoardPaddingTop - ChessBoard.ChessSize * 2);
+            progressBar.Width = ChessBoard.BoardColumns * ChessBoard.ChessSize - timeLabel.Width;
+            progressBar.Value = 100;
+            Controls.Add(progressBar);
+
+            for (int i = 0; i < ChessBoard.BoardRows; i++)
+            {
+                Label label = new Label();
+                label.Text = ((char)('A' + i)).ToString();
+                label.Font = new Font("Arial", 12, FontStyle.Bold);
+                label.TextAlign = ContentAlignment.MiddleCenter;
+                label.Height = ChessBoard.ChessSize;
+                label.Width = ChessBoard.ChessSize;
+                label.Location = new Point(ChessBoard.BoardPaddingLeft + ChessBoard.ChessSize * i,
+                    ChessBoard.BoardPaddingTop - ChessBoard.ChessSize);
+                Controls.Add(label);
+            }
+
+            for (int i = 0; i < ChessBoard.BoardColumns; i++)
+            {
+                Label label = new Label();
+                label.Text = (i + 1).ToString();
+                label.Font = new Font("Arial", 12, FontStyle.Bold);
+                label.TextAlign = ContentAlignment.MiddleCenter;
+                label.Height = ChessBoard.ChessSize;
+                label.Width = ChessBoard.ChessSize;
+                label.Location = new Point(ChessBoard.BoardPaddingLeft - ChessBoard.ChessSize,
+                    ChessBoard.BoardPaddingTop + ChessBoard.ChessSize * i);
+                Controls.Add(label);
+            }
+
+            for (int i = 1; i <= ChessBoard.BoardRows; i++)
+            {
+                for (int j = 1; j <= ChessBoard.BoardColumns; j++)
+                {
+                    Button button = new Button();
+                    button.Name = "Chess_" + i.ToString() + "_" + j.ToString();
+                    button.Width = ChessBoard.ChessSize;
+                    button.Height = ChessBoard.ChessSize;
+                    button.Location = new Point(ChessBoard.BoardPaddingLeft + ChessBoard.ChessSize * (j - 1),
+                        ChessBoard.BoardPaddingTop + ChessBoard.ChessSize * (i - 1));
+                    button.Click += btnChess_Click;
+                    button.BackgroundImageLayout = ImageLayout.Stretch;
+                    Controls.Add(button);                    
+                }
+            }
+            
+            timerTurn.Start();
+            timerGameDuration.Start();
+
+            for (int i = 1; i <= ChessBoard.BoardRows; i++)
+            {
+                for(int j = 1; j <= ChessBoard.BoardColumns; j++)
+                {
+                    if(_ChessBoard.Chesses[i, j].Owner == 1) {
+                        Button chess = Controls.Find("Chess_" + i.ToString() + "_" + j.ToString(), 
+                            false)[0] as Button;
+                        chess.BackgroundImage = new Bitmap(Properties.Resources.cross);
+                    }
+                    else if (_ChessBoard.Chesses[i, j].Owner == 2)
+                    {
+                        Button chess = Controls.Find("Chess_" + i.ToString() + "_" + j.ToString(),
+                            false)[0] as Button;
+                        chess.BackgroundImage = new Bitmap(Properties.Resources.round);
+                    }
+                }
+            }
+        }
+
         private void PlayWithComViewForm_Load(object sender, EventArgs e)
         {
-            initBoard();
-            Presenter.StartCom();            
+            if(this._ChessBoard == null)
+            {
+                initBoard();
+                Presenter.ComputerMove(_ChessBoard);
+            }
+            else
+            {
+                initBoardCoThe();
+                if (_ChessBoard.TurnOwner == 1)
+                {
+                    Presenter.ComputerMove(_ChessBoard);
+                }
+            }            
         }
 
         private void btnChess_Click(object sender, EventArgs e)
         {
-            int row = (((Button)sender).Location.Y - ChessBoard.BoardPaddingTop) / ChessBoard.ChessSize + 1;
-            int column = (((Button)sender).Location.X - ChessBoard.BoardPaddingLeft) / ChessBoard.ChessSize + 1;
+            //int row = (((Button)sender).Location.Y - ChessBoard.BoardPaddingTop) / ChessBoard.ChessSize + 1;
+            //int column = (((Button)sender).Location.X - ChessBoard.BoardPaddingLeft) / ChessBoard.ChessSize + 1;
+
+            Button clickedButton = sender as Button;
+            int row = int.Parse(clickedButton.Name.Split('_')[1]);
+            int column = int.Parse(clickedButton.Name.Split('_')[2]);
 
             if (_ChessBoard.Chesses[row, column].Owner != 0 || _ChessBoard.IsEnd)
             {
@@ -244,9 +377,7 @@ namespace CoCaro.View.PlayWithCom
 
             //MessageBox.Show(row.ToString() + " " + column.ToString());            
 
-            ((Button)sender).BackgroundImage = new Bitmap(Properties.Resources.round);
-
-            _ChessBoard.NumberOfMove++;
+            clickedButton.BackgroundImage = new Bitmap(Properties.Resources.round);            
 
             Presenter.StoreMove(this._ChessBoard.Id, row, column);
             int result = Presenter.CheckGame(_ChessBoard, row, column);
@@ -257,7 +388,7 @@ namespace CoCaro.View.PlayWithCom
             else
             {
                 ChangeTurn();
-                Presenter.StartCom();                
+                Presenter.ComputerMove(_ChessBoard);                
             }
         }
 
@@ -265,7 +396,7 @@ namespace CoCaro.View.PlayWithCom
         {
             Controls.Clear();
             initBoard();
-            Presenter.StartCom();
+            Presenter.ComputerMove(_ChessBoard);
         }
 
         private void timer_Tick(object sender, EventArgs e)

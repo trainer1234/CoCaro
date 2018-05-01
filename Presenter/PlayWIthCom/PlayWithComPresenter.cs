@@ -29,7 +29,7 @@ namespace CoCaro.Presenter.PlayWIthCom
             this._ChessBoard = chessBoard;
             this.LastMove = chessBoard.Chesses[row, column];
 
-            if (chessBoard.NumberOfMove == ChessBoard.BoardRows * ChessBoard.BoardColumns)
+            if (chessBoard.Moves.Count == ChessBoard.BoardRows * ChessBoard.BoardColumns)
             {
                 return 0;
             }
@@ -238,7 +238,7 @@ namespace CoCaro.Presenter.PlayWIthCom
             string move = "";
             move += ((char)(column - 1 + 'A')).ToString();
             move += (row).ToString();
-            MessageBox.Show(move);
+            //MessageBox.Show(move);
             _ChessBoard.Moves.Add(move);
             dataSource.StoreMove(id, move);
         }
@@ -246,8 +246,9 @@ namespace CoCaro.Presenter.PlayWIthCom
         #region TTNT-AI(Artificial Intelligence)
         private long[] _MD_TC = new long[6] { 0, 64, 4096, 262144, 16777216, 1073741824 }; //Điểm tấn công
         private long[] _MD_PT = new long[6] { 0, 8, 512, 32768, 2097152, 134217728 }; // Điểm phòng thủ
-        public void StartCom()
+        public void ComputerMove(ChessBoard chessBoard)
         {
+            this._ChessBoard = chessBoard;
             if (_ChessBoard.Moves.Count == 0)
             {
                 view.ComSetChess(ChessBoard.BoardRows / 2, ChessBoard.BoardColumns / 2);
