@@ -96,7 +96,7 @@ namespace CoCaro.Test
                 Assert.AreEqual(expectedResult[i].Winner, historyData[i].Winner, "Wrong winner " + i.ToString());
                 Assert.AreEqual(expectedResult[i].Duration, historyData[i].GameDuration, "Wrong game duration " + i.ToString());
                 Assert.AreEqual(expectedResult[i].StartTime, historyData[i].StartTime, "Wrong start time " + i.ToString());
-                Assert.AreEqual(expectedResult[i].Moves.Count, historyData[i].NumberOfMove, "Wrong number of move " + i.ToString());
+                //Assert.AreEqual(expectedResult[i].Moves.Count, historyData[i].NumberOfMove, "Wrong number of move " + i.ToString());
                 for (int j = 0; j < expectedResult[i].Moves.Count; j++)
                 {
                     Assert.AreEqual(expectedResult[i].Moves[j].Point, historyData[i].Moves[j]);
@@ -157,7 +157,7 @@ namespace CoCaro.Test
             Assert.AreEqual(expectedResult.Winner, gameRecord.Winner, "Wrong winner");
             Assert.AreEqual(expectedResult.StartTime, gameRecord.StartTime, "Wrong start time");
             Assert.AreEqual(expectedResult.Duration, gameRecord.GameDuration, "Wrong Duration");
-            Assert.AreEqual(expectedResult.Moves.Count, gameRecord.NumberOfMove, "Wrong number of move");
+            //Assert.AreEqual(expectedResult.Moves.Count, gameRecord.NumberOfMove, "Wrong number of move");
             for (int i = 0; i < expectedResult.Moves.Count; i++)
             {
                 Assert.AreEqual(expectedResult.Moves[i].Point, gameRecord.Moves[i]);
