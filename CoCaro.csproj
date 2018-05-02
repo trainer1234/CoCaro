@@ -67,6 +67,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\Context\CaroContext.cs" />
+    <Compile Include="DAL\Models\CoTheLevel.cs" />
+    <Compile Include="DAL\Models\CoTheMove.cs" />
     <Compile Include="DAL\Models\Game.cs" />
     <Compile Include="DAL\Models\Move.cs" />
     <Compile Include="Enum\ChessType.cs" />
@@ -80,9 +82,14 @@
     <Compile Include="Migrations\201804171744386_InitialCreate.Designer.cs">
       <DependentUpon>201804171744386_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805021600477_AddCoTheLevelAndCoTheMoveTable.cs" />
+    <Compile Include="Migrations\201805021600477_AddCoTheLevelAndCoTheMoveTable.Designer.cs">
+      <DependentUpon>201805021600477_AddCoTheLevelAndCoTheMoveTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Chess.cs" />
     <Compile Include="Model\ChessBoard.cs" />
+    <Compile Include="Model\CoTheChessboard.cs" />
     <Compile Include="Model\DataSource.cs" />
     <Compile Include="Model\IDataSource.cs" />
     <Compile Include="Presenter\CoThe\CoThePresenter.cs" />
@@ -143,6 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804171744386_InitialCreate.resx">
       <DependentUpon>201804171744386_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805021600477_AddCoTheLevelAndCoTheMoveTable.resx">
+      <DependentUpon>201805021600477_AddCoTheLevelAndCoTheMoveTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -17,6 +17,8 @@ namespace CoCaro.DAL.Context
 
         public virtual DbSet<Move> Moves { get; set; }
         public virtual DbSet<Game> Games { get; set; }
+        public virtual DbSet<CoTheLevel> CoTheLevels { get; set; }
+        public virtual DbSet<CoTheMove> CoTheMoves { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

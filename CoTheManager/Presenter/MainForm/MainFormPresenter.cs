@@ -12,11 +12,13 @@ namespace CoTheManager.Presenter
     {
         private IMainFormView view;
         private IDataSource dataSource;
+
         public MainFormPresenter(IMainFormView view, IDataSource dataSource)
         {
             this.view = view;
             this.dataSource = dataSource;
         }
+
         public void LoadLevels()
         {
             view.ShowLevels(this.dataSource.GetAllCoTheGameLevels());
