@@ -171,16 +171,99 @@ namespace CoCaro.Model
 
         public void SaveCoTheLevel(CoTheGameLevel gameLevel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var coTheLevels = caroContext.CoTheLevels.Include(level => level.CoTheMoves);
+                if(coTheLevels != null)
+                {
+                    var levelToModify = coTheLevels.SingleOrDefault(level => level.Id == gameLevel.Id);
+                    if(levelToModify != null)
+                    {
+                        var coTheMoves = caroContext.CoTheMoves.ToList();
+                        var coTheMovesToModify = levelToModify.CoTheMoves.Select(move => move.Point).ToList();
+
+                        // find differences between two lists
+                        var movesToDelete = coTheMovesToModify.Except(gameLevel.Moves);
+                        foreach (var move in movesToDelete)
+                        {
+                            var moveToDelete = coTheMoves.SingleOrDefault(m =>
+                                m.CoTheLevelId == levelToModify.Id && m.Point == move);
+                            caroContext.CoTheMoves.Remove(moveToDelete);
+                        }
+
+                        var movesToAdd = gameLevel.Moves.Except(coTheMovesToModify);
+                        foreach (var move in movesToAdd)
+                        {
+                            var moveToAdd = new CoTheMove
+                            {
+                                CoTheLevelId = levelToModify.Id,
+                                Point = move
+                            };
+                            caroContext.CoTheMoves.Add(moveToAdd);
+                        }
+
+                        caroContext.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public void AddCoTheLevel(CoTheGameLevel gameLevel)
         {
+            try
+            {
+                var coTheLevel = new CoTheLevel
+                {
+                    LimitedMove = gameLevel.LimitedMoves
+                };
+                caroContext.CoTheLevels.Add(coTheLevel);
+                caroContext.SaveChanges();
+
+                foreach (var move in gameLevel.Moves)
+                {
+                    var coTheMove = new CoTheMove
+                    {
+                        Point = move
+                    };
+                    caroContext.CoTheMoves.Add(coTheMove);
+                }
+                caroContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public void DeleteCoTheLevel(int gameLevelId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var gameLevel = caroContext.CoTheLevels.Include(level => level.CoTheMoves);
+                if (gameLevel != null)
+                {
+                    var levelToDelete = gameLevel.SingleOrDefault(level => level.Id == gameLevelId);
+                    if (levelToDelete != null)
+                    {
+                        foreach (var move in levelToDelete.CoTheMoves)
+                        {
+                            caroContext.CoTheMoves.Remove(move);
+                        }
+                        //caroContext.SaveChanges();
+
+                        caroContext.CoTheLevels.Remove(levelToDelete);
+                        caroContext.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }
