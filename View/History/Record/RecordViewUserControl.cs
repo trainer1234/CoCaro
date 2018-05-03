@@ -55,7 +55,7 @@ namespace CoCaro.View.History.Record
 
         private void IRecordViewUserControl_MouseLeave(object sender, EventArgs e)
         {
-            BackColor = SystemColors.Control;
+            BackColor = Color.White;
         }
 
         private void IRecordViewUserControl_MouseDown(object sender, MouseEventArgs e)
@@ -65,7 +65,7 @@ namespace CoCaro.View.History.Record
 
         private void IRecordViewUserControl_MouseUp(object sender, MouseEventArgs e)
         {
-            BackColor = SystemColors.Control;
+            BackColor = Color.White;
         }
 
         private void RecordViewUserControl_Click(object sender, EventArgs e)
