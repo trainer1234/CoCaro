@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoCaro.DAL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace CoCaro.Model
         void StoreMove(int id, string move);
         List<ChessBoard> GetHistory();
         ChessBoard GetGameRecord(int id);
-        ChessBoard[] GetAllCoTheGameLevels();
+        CoTheLevel[] GetAllCoTheGameLevels();
         void SaveCoTheLevel(ChessBoard gameLevel);
         void AddCoTheLevel(ChessBoard gameLevel);
         void DeleteCoTheLevel(int gameLevelId);

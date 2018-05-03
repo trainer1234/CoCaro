@@ -1,4 +1,5 @@
-﻿using CoCaro.Model;
+﻿using CoCaro.DAL.Models;
+using CoCaro.Model;
 using CoCaro.Presenter.CoThe;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,6 @@ namespace CoCaro.View.CoThe
     public interface ICoTheView
     {
         CoThePresenter Presenter { set; }
-        void ShowLevels(ChessBoard[] gameLevels);
+        void ShowLevels(CoTheLevel[] gameLevels);
     }
 }

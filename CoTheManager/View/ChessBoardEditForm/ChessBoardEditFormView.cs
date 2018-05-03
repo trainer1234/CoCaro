@@ -86,7 +86,7 @@ namespace CoTheManager.View.ChessBoardEditForm
             Controls.Add(lblLimitMoves);
 
             TextBox txtLimitMoves = new TextBox();
-            txtLimitMoves.Name = "txtLimiteMoves";
+            txtLimitMoves.Name = "txtLimitedMoves";
             txtLimitMoves.Width = buttonWidth;
             txtLimitMoves.Height = buttonHeight;
             txtLimitMoves.Text = "0";
@@ -258,6 +258,9 @@ namespace CoTheManager.View.ChessBoardEditForm
 
         private void btnSaveChange_Click(object sender, EventArgs e)
         {
+            TextBox txtLimitedMoves = Controls.Find("txtLimitedMoves", false)[0] as TextBox;
+            this.gameLevel.LimitedMoves = int.Parse(txtLimitedMoves.Text);
+
             if (this.isAddingLevel)
             {
                 Presenter.AddGameLevel(this.gameLevel);

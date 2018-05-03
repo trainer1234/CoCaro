@@ -23,8 +23,6 @@ namespace CoCaro.Model
         public int GameDuration { get; set; }
         public DateTime StartTime { get; set; }
         public int Winner { get; set; }
-        public int LimitedMoves { get; set; }
-
         public ChessBoard()
         {
             Chesses = initChesses();            
@@ -41,11 +39,10 @@ namespace CoCaro.Model
             this.Id = id;
         }
 
-        public ChessBoard(int id, Chess[,] initMoves, int limitedMoves) : this()
+        public ChessBoard(int id, Chess[,] initMoves) : this()
         {
             this.Id = id;
             this.Chesses = initMoves;
-            this.LimitedMoves = limitedMoves;
         }
 
         public static Chess[,] initChesses()

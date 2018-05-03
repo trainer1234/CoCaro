@@ -15,7 +15,11 @@ namespace CoCaro.DAL.Models
         public int Id { get; set; }
         public int CoTheLevelId { get; set; }
         public string Point { get; set; }
-
         public CoTheLevel CoTheLevel { get; set; }
+
+        public CoTheMove(string Point)
+        {            
+            this.Point = Point;            
+        }
     }
 }

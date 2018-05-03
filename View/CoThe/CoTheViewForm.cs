@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CoCaro.DAL.Models;
 using CoCaro.Model;
 using CoCaro.Presenter.CoThe;
 using CoCaro.View.PlayWithCom;
@@ -15,7 +16,7 @@ namespace CoCaro.View.CoThe
 {
     public partial class CoTheViewForm : Form, ICoTheView
     {
-        private ChessBoard[] gameLevels;
+        private CoTheLevel[] gameLevels;
         public CoTheViewForm()
         {
             InitializeComponent();
@@ -24,7 +25,7 @@ namespace CoCaro.View.CoThe
 
         public CoThePresenter Presenter { private get; set; }
 
-        public void ShowLevels(ChessBoard[] gameLevels)
+        public void ShowLevels(CoTheLevel[] gameLevels)
         {
             this.gameLevels = gameLevels;
             if(gameLevels == null || gameLevels.Length < 1)

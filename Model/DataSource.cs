@@ -136,21 +136,19 @@ namespace CoCaro.Model
             }
         }
 
-        public ChessBoard[] GetAllCoTheGameLevels()
+        public CoTheLevel[] GetAllCoTheGameLevels()
         {
-            ChessBoard[] chessBoards = new ChessBoard[20];
+            CoTheLevel[] coTheLevels = new CoTheLevel[20];
 
-            Chess[,] chesses = ChessBoard.initChesses();
-            chesses[10, 10] = new Chess(10, 10, 1, true);
-            chesses[10, 11] = new Chess(10, 11, 2, true);
-            chesses[11, 10] = new Chess(11, 10, 1, true);
-            chesses[10, 12] = new Chess(10, 12, 2, true);
-            chesses[12, 10] = new Chess(12, 10, 1, true);
-            chesses[10, 13] = new Chess(10, 13, 2, true);
-
-            chessBoards[0] = new ChessBoard(1, chesses, 5);
-            chessBoards[0].Moves.AddRange(new string[] { "J10", "J10", "J10", "J10", "J10", "J10" });
-            return chessBoards;
+            List<CoTheMove> initMoves = new List<CoTheMove>();
+            initMoves.Add(new CoTheMove("J10"));
+            initMoves.Add(new CoTheMove("H10"));
+            initMoves.Add(new CoTheMove("J11"));
+            initMoves.Add(new CoTheMove("H11"));
+            initMoves.Add(new CoTheMove("J12"));
+            initMoves.Add(new CoTheMove("H12"));
+            coTheLevels[0] = new CoTheLevel(1, initMoves, 5);            
+            return coTheLevels;
         }
 
         public void SaveCoTheLevel(ChessBoard gameLevel)
