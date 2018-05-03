@@ -15,25 +15,6 @@ namespace CoCaro.DAL.Models
         public int Id { get; set; }
         public int LimitedMove { get; set; }
 
-        public List<CoTheMove> CoTheMoves { get; set; }
-
-        public CoTheLevel(int id, List<CoTheMove> moves, int limitedMove)
-        {
-            this.Id = id;
-            this.CoTheMoves = moves;
-            this.LimitedMove = limitedMove;
-        }
-
-        public int GetTurnOwner()
-        {
-            if(CoTheMoves.Count % 2 == 0)
-            {
-                return 1;
-            }
-            else
-            {
-                return 2;
-            }
-        }
+        public List<CoTheMove> CoTheMoves { get; set; }        
     }
 }

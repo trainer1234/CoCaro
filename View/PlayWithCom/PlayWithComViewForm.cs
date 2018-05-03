@@ -16,7 +16,7 @@ namespace CoCaro.View.PlayWithCom
     public partial class PlayWithComViewForm : Form, IPlayWithComView
     {
         ChessBoard chessBoard;
-        CoTheLevel coTheLevel;
+        CoTheGameLevel coTheLevel;
 
         public PlayWithComPresenter Presenter { private get; set; }
 
@@ -26,7 +26,7 @@ namespace CoCaro.View.PlayWithCom
             Presenter = new PlayWithComPresenter(this, Program.DataSource);
         }
 
-        public PlayWithComViewForm(CoTheLevel coTheLevel) : this()
+        public PlayWithComViewForm(CoTheGameLevel coTheLevel) : this()
         {
             this.coTheLevel = coTheLevel;
         }
@@ -58,7 +58,7 @@ namespace CoCaro.View.PlayWithCom
             this.Height = 2 * ChessBoard.BoardPaddingTop + 
                 ChessBoard.ChessSize * ChessBoard.BoardRows;
 
-            chessBoard = Presenter.CreateNewGame();
+            chessBoard = Presenter.CreateNewGame(false);
 
             Label turnLabel = new Label();
             turnLabel.Name = "lblTurn";
@@ -263,7 +263,7 @@ namespace CoCaro.View.PlayWithCom
             Label turnLabel = new Label();
             turnLabel.Name = "lblTurn";
 
-            if(chessBoard.TurnOwner == 1)
+            if(coTheLevel.GetTurnOwner() == 1)
             {
                 turnLabel.Text = "Đến lượt máy đi";
             }
@@ -346,23 +346,25 @@ namespace CoCaro.View.PlayWithCom
             timerTurn.Start();
             timerGameDuration.Start();
 
-            for (int i = 1; i <= ChessBoard.BoardRows; i++)
+            chessBoard = Presenter.CreateNewGame(true);
+            for(int i = 0; i < coTheLevel.Moves.Count; i++)
             {
-                for(int j = 1; j <= ChessBoard.BoardColumns; j++)
+                int turnOwner = int.Parse(coTheLevel.Moves[i].Split('_')[0]);
+                string move = coTheLevel.Moves[i].Split('_')[1];
+                int column = move[0] - 'A' + 1;
+                int row = int.Parse(move.Substring(1));
+                chessBoard.Chesses[row, column].Owner = turnOwner;
+                Button chess = Controls.Find("Chess_" + row.ToString() + "_" + column.ToString(),
+                            false)[0] as Button;                
+                if (turnOwner == 1)
                 {
-                    if(chessBoard.Chesses[i, j].Owner == 1) {
-                        Button chess = Controls.Find("Chess_" + i.ToString() + "_" + j.ToString(), 
-                            false)[0] as Button;
-                        chess.BackgroundImage = new Bitmap(Properties.Resources.cross);
-                    }
-                    else if (chessBoard.Chesses[i, j].Owner == 2)
-                    {
-                        Button chess = Controls.Find("Chess_" + i.ToString() + "_" + j.ToString(),
-                            false)[0] as Button;
-                        chess.BackgroundImage = new Bitmap(Properties.Resources.round);
-                    }
+                    chess.BackgroundImage = new Bitmap(Properties.Resources.cross);
                 }
-            }
+                else
+                {
+                    chess.BackgroundImage = new Bitmap(Properties.Resources.round);
+                }
+            }            
         }
 
         private void PlayWithComViewForm_Load(object sender, EventArgs e)

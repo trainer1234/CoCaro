@@ -9,14 +9,14 @@ namespace CoCaro.Model
 {
     public interface IDataSource
     {
-        ChessBoard CreateNewGame();
+        ChessBoard CreateNewGame(bool isCoThe);
         void EndGame(int id, int winner, int duration);
         void StoreMove(int id, string move);
         List<ChessBoard> GetHistory();
         ChessBoard GetGameRecord(int id);
-        CoTheLevel[] GetAllCoTheGameLevels();
-        void SaveCoTheLevel(ChessBoard gameLevel);
-        void AddCoTheLevel(ChessBoard gameLevel);
+        CoTheGameLevel[] GetAllCoTheGameLevels();
+        void SaveCoTheLevel(CoTheGameLevel gameLevel);
+        void AddCoTheLevel(CoTheGameLevel gameLevel);
         void DeleteCoTheLevel(int gameLevelId);
     }
 }

@@ -222,7 +222,7 @@ namespace CoCaro.Presenter.PlayWithPlayer
 
         public ChessBoard CreateNewGame()
         {
-            return dataSource.CreateNewGame();
+            return dataSource.CreateNewGame(false);
         }
 
         public void EndGame(int id, int winner, int duration)

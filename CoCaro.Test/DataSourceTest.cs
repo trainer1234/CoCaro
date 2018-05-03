@@ -174,7 +174,7 @@ namespace CoCaro.Test
             systemUnderTest = new DataSource(mockCaroContext.Object);
 
             // Act
-            var newChessBoard = systemUnderTest.CreateNewGame();
+            var newChessBoard = systemUnderTest.CreateNewGame(false);
 
             // Assert
             gameMockSet.Verify(m => m.Add(It.IsAny<Game>()), Times.Once());

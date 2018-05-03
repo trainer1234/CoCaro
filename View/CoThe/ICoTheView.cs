@@ -12,6 +12,6 @@ namespace CoCaro.View.CoThe
     public interface ICoTheView
     {
         CoThePresenter Presenter { set; }
-        void ShowLevels(CoTheLevel[] gameLevels);
+        void ShowLevels(CoTheGameLevel[] gameLevels);
     }
 }

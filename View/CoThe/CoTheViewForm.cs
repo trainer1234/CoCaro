@@ -16,7 +16,7 @@ namespace CoCaro.View.CoThe
 {
     public partial class CoTheViewForm : Form, ICoTheView
     {
-        private CoTheLevel[] gameLevels;
+        private CoTheGameLevel[] gameLevels;
         public CoTheViewForm()
         {
             InitializeComponent();
@@ -25,7 +25,7 @@ namespace CoCaro.View.CoThe
 
         public CoThePresenter Presenter { private get; set; }
 
-        public void ShowLevels(CoTheLevel[] gameLevels)
+        public void ShowLevels(CoTheGameLevel[] gameLevels)
         {
             this.gameLevels = gameLevels;
             if(gameLevels == null || gameLevels.Length < 1)

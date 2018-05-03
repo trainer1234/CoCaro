@@ -32,7 +32,7 @@ namespace CoCaro.Model
             //this.ChessBoards.Add(new ChessBoard(6));
         }
 
-        public ChessBoard CreateNewGame()
+        public ChessBoard CreateNewGame(bool isCoThe)
         {
             Game newGame = new Game
             {
@@ -136,27 +136,27 @@ namespace CoCaro.Model
             }
         }
 
-        public CoTheLevel[] GetAllCoTheGameLevels()
+        public CoTheGameLevel[] GetAllCoTheGameLevels()
         {
-            CoTheLevel[] coTheLevels = new CoTheLevel[20];
+            CoTheGameLevel[] coTheLevels = new CoTheGameLevel[20];
 
-            List<CoTheMove> initMoves = new List<CoTheMove>();
-            initMoves.Add(new CoTheMove("J10"));
-            initMoves.Add(new CoTheMove("H10"));
-            initMoves.Add(new CoTheMove("J11"));
-            initMoves.Add(new CoTheMove("H11"));
-            initMoves.Add(new CoTheMove("J12"));
-            initMoves.Add(new CoTheMove("H12"));
-            coTheLevels[0] = new CoTheLevel(1, initMoves, 5);            
+            List<string> initMoves = new List<string>();
+            initMoves.Add("1_J10");
+            initMoves.Add("2_H10");
+            initMoves.Add("1_J11");
+            initMoves.Add("2_H11");
+            initMoves.Add("1_J12");
+            initMoves.Add("2_H12");
+            coTheLevels[0] = new CoTheGameLevel(1, initMoves, 5);            
             return coTheLevels;
         }
 
-        public void SaveCoTheLevel(ChessBoard gameLevel)
+        public void SaveCoTheLevel(CoTheGameLevel gameLevel)
         {
             throw new NotImplementedException();
         }
 
-        public void AddCoTheLevel(ChessBoard gameLevel)
+        public void AddCoTheLevel(CoTheGameLevel gameLevel)
         {
             throw new NotImplementedException();
         }

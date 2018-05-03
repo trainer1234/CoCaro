@@ -12,6 +12,6 @@ namespace CoTheManager.View
     {
         MainFormPresenter Presenter { set; }
 
-        void ShowLevels(ChessBoard[] gameLevels);
+        void ShowLevels(CoTheGameLevel[] gameLevels);
     }
 }

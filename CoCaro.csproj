@@ -86,10 +86,14 @@
     <Compile Include="Migrations\201805021600477_AddCoTheLevelAndCoTheMoveTable.Designer.cs">
       <DependentUpon>201805021600477_AddCoTheLevelAndCoTheMoveTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805031545459_AddIsCoTheGameFieldInGameTable.cs" />
+    <Compile Include="Migrations\201805031545459_AddIsCoTheGameFieldInGameTable.Designer.cs">
+      <DependentUpon>201805031545459_AddIsCoTheGameFieldInGameTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Chess.cs" />
     <Compile Include="Model\ChessBoard.cs" />
-    <Compile Include="Model\CoTheChessboard.cs" />
+    <Compile Include="Model\CoTheGameLevel.cs" />
     <Compile Include="Model\DataSource.cs" />
     <Compile Include="Model\IDataSource.cs" />
     <Compile Include="Presenter\CoThe\CoThePresenter.cs" />
@@ -153,6 +157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805021600477_AddCoTheLevelAndCoTheMoveTable.resx">
       <DependentUpon>201805021600477_AddCoTheLevelAndCoTheMoveTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805031545459_AddIsCoTheGameFieldInGameTable.resx">
+      <DependentUpon>201805031545459_AddIsCoTheGameFieldInGameTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

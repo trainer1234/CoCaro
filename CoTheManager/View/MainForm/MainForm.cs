@@ -16,7 +16,7 @@ namespace CoTheManager
 {
     public partial class MainForm : Form, IMainFormView
     {
-        private ChessBoard[] gameLevels;
+        private CoTheGameLevel[] gameLevels;
         public MainFormPresenter Presenter { private get; set; }
         public MainForm()
         {
@@ -29,7 +29,7 @@ namespace CoTheManager
             Presenter.LoadLevels();
         }
 
-        public void ShowLevels(ChessBoard[] gameLevels)
+        public void ShowLevels(CoTheGameLevel[] gameLevels)
         {
             this.gameLevels = gameLevels;
             if (gameLevels == null || gameLevels.Length < 1)

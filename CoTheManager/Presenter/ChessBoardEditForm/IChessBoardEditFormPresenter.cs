@@ -9,8 +9,8 @@ namespace CoTheManager.Presenter.ChessBoardEditForm
 {
     interface IChessBoardEditFormPresenter
     {
-        void SaveGameLevel(ChessBoard chessBoard);
+        void SaveGameLevel(CoTheGameLevel chessBoard);
         void DeleteGameLevel(int chessBoardId);
-        void AddGameLevel(ChessBoard chessBoard);
+        void AddGameLevel(CoTheGameLevel chessBoard);
     }
 }
