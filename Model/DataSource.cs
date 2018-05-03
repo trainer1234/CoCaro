@@ -136,19 +136,37 @@ namespace CoCaro.Model
             }
         }
 
-        public CoTheGameLevel[] GetAllCoTheGameLevels()
+        public List<CoTheGameLevel> GetAllCoTheGameLevels()
         {
-            CoTheGameLevel[] coTheLevels = new CoTheGameLevel[20];
+            //CoTheGameLevel[] coTheLevels = new CoTheGameLevel[20];
 
-            List<string> initMoves = new List<string>();
-            initMoves.Add("1_J10");
-            initMoves.Add("2_H10");
-            initMoves.Add("1_J11");
-            initMoves.Add("2_H11");
-            initMoves.Add("1_J12");
-            initMoves.Add("2_H12");
-            coTheLevels[0] = new CoTheGameLevel(1, initMoves, 5);            
-            return coTheLevels;
+            //List<string> initMoves = new List<string>();
+            //initMoves.Add("1_J10");
+            //initMoves.Add("2_H10");
+            //initMoves.Add("1_J11");
+            //initMoves.Add("2_H11");
+            //initMoves.Add("1_J12");
+            //initMoves.Add("2_H12");
+            //coTheLevels[0] = new CoTheGameLevel(1, initMoves, 5);            
+            var coTheLevels = caroContext.CoTheLevels.ToList();
+            List<CoTheGameLevel> coTheGameLevels = new List<CoTheGameLevel>();
+
+            foreach (var level in coTheLevels)
+            {
+                List<string> moves = new List<string>();
+                foreach(var move in level.CoTheMoves)
+                {
+                    moves.Add(move.Point);
+                }
+                coTheGameLevels.Add(new CoTheGameLevel
+                {
+                    Id = level.Id,
+                    Moves = moves,
+                    LimitedMoves = level.LimitedMove
+                });
+            }
+
+            return coTheGameLevels;
         }
 
         public void SaveCoTheLevel(CoTheGameLevel gameLevel)
@@ -158,7 +176,6 @@ namespace CoCaro.Model
 
         public void AddCoTheLevel(CoTheGameLevel gameLevel)
         {
-            throw new NotImplementedException();
         }
 
         public void DeleteCoTheLevel(int gameLevelId)

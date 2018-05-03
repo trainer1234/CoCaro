@@ -16,7 +16,7 @@ namespace CoTheManager
 {
     public partial class MainForm : Form, IMainFormView
     {
-        private CoTheGameLevel[] gameLevels;
+        private List<CoTheGameLevel> gameLevels;
         public MainFormPresenter Presenter { private get; set; }
         public MainForm()
         {
@@ -29,10 +29,10 @@ namespace CoTheManager
             Presenter.LoadLevels();
         }
 
-        public void ShowLevels(CoTheGameLevel[] gameLevels)
+        public void ShowLevels(List<CoTheGameLevel> gameLevels)
         {
             this.gameLevels = gameLevels;
-            if (gameLevels == null || gameLevels.Length < 1)
+            if (gameLevels == null || gameLevels.Count < 1)
             {
                 return;
             }
@@ -43,7 +43,7 @@ namespace CoTheManager
             int levelsInRow = 5;
 
             this.Width = 2 * paddingLeft + levelsInRow * (2 * buttonSize);
-            this.Height = 2 * paddingTop + ((gameLevels.Length + 1) / levelsInRow + 1) * (2 * buttonSize);
+            this.Height = 2 * paddingTop + ((gameLevels.Count + 1) / levelsInRow + 1) * (2 * buttonSize);
 
             Label title = new Label();
             title.Width = 100;
@@ -55,9 +55,9 @@ namespace CoTheManager
 
             Controls.Add(title);
 
-            for (int i = 0; i <= gameLevels.Length; i++)
+            for (int i = 0; i <= gameLevels.Count; i++)
             {
-                if(i == gameLevels.Length)
+                if(i == gameLevels.Count)
                 {
                     Button btnNewLevel = new Button();
                     btnNewLevel.Name = "btnLevel_New";

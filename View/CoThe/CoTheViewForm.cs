@@ -16,7 +16,7 @@ namespace CoCaro.View.CoThe
 {
     public partial class CoTheViewForm : Form, ICoTheView
     {
-        private CoTheGameLevel[] gameLevels;
+        private List<CoTheGameLevel> gameLevels;
         public CoTheViewForm()
         {
             InitializeComponent();
@@ -25,10 +25,10 @@ namespace CoCaro.View.CoThe
 
         public CoThePresenter Presenter { private get; set; }
 
-        public void ShowLevels(CoTheGameLevel[] gameLevels)
+        public void ShowLevels(List<CoTheGameLevel> gameLevels)
         {
             this.gameLevels = gameLevels;
-            if(gameLevels == null || gameLevels.Length < 1)
+            if(gameLevels == null || gameLevels.Count < 1)
             {
                 return;
             }
@@ -39,7 +39,7 @@ namespace CoCaro.View.CoThe
             int levelsInRow = 5;
 
             this.Width = 2 * paddingLeft + levelsInRow * (2 * buttonSize);
-            this.Height = 2 * paddingTop + gameLevels.Length / levelsInRow * (2 * buttonSize);
+            this.Height = 2 * paddingTop + gameLevels.Count / levelsInRow * (2 * buttonSize);
 
             Label title = new Label();
             title.Width = 100;
@@ -51,7 +51,7 @@ namespace CoCaro.View.CoThe
 
             Controls.Add(title);
 
-            for(int i=0;i<gameLevels.Length; i++)
+            for(int i=0;i<gameLevels.Count; i++)
             {
                 Button btnLevel = new Button();
                 btnLevel.Name = "btnLevel_" + i.ToString();
