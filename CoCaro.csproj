@@ -100,6 +100,7 @@
     <Compile Include="Model\CoTheGameLevel.cs" />
     <Compile Include="Model\DataSource.cs" />
     <Compile Include="Model\IDataSource.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Presenter\ChessBoardEditForm\ChessBoardEditFormPresenter.cs" />
     <Compile Include="Presenter\ChessBoardEditForm\IChessBoardEditFormPresenter.cs" />
     <Compile Include="Presenter\CoThe\CoThePresenter.cs" />
