@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CoCaro.Presenter.PlayWithPlayer
 {
-    interface IPlayWithPlayerPresenter
+    public interface IPlayWithPlayerPresenter
     {
         ChessBoard CreateNewGame();
         void EndGame(int id, int winner, int duration);

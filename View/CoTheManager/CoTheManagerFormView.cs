@@ -1,27 +1,22 @@
 ﻿using CoCaro.Model;
-using CoTheManager.Presenter;
-using CoTheManager.View;
-using CoTheManager.View.ChessBoardEditForm;
+using CoCaro.Presenter;
+using CoCaro.View;
+using CoCaro.View.ChessBoardEditForm;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CoTheManager
+namespace CoCaro.View.MainForm
 {
-    public partial class MainForm : Form, IMainFormView
+    public partial class CoTheManagerFormView : Form, ICoTheManagerFormView
     {
         private List<CoTheGameLevel> gameLevels;
-        public MainFormPresenter Presenter { private get; set; }
-        public MainForm()
+        public CoTheManagerPresenter Presenter { private get; set; }
+        public CoTheManagerFormView()
         {
             InitializeComponent();
-            Presenter = new MainFormPresenter(this, Program.DataSource);
+            Presenter = new CoTheManagerPresenter(this, Program.DataSource);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -31,11 +26,7 @@ namespace CoTheManager
 
         public void ShowLevels(List<CoTheGameLevel> gameLevels)
         {
-            this.gameLevels = gameLevels;
-            if (gameLevels == null || gameLevels.Count < 1)
-            {
-                return;
-            }
+            this.gameLevels = gameLevels;            
 
             int buttonSize = 50;
             int paddingTop = 100;

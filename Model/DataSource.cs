@@ -148,15 +148,19 @@ namespace CoCaro.Model
             //initMoves.Add("1_J12");
             //initMoves.Add("2_H12");
             //coTheLevels[0] = new CoTheGameLevel(1, initMoves, 5);            
-            var coTheLevels = caroContext.CoTheLevels.ToList();
+            var coTheLevels = caroContext.CoTheLevels.Include(level => level.CoTheMoves).ToList();
             List<CoTheGameLevel> coTheGameLevels = new List<CoTheGameLevel>();
 
             foreach (var level in coTheLevels)
             {
                 List<string> moves = new List<string>();
-                foreach(var move in level.CoTheMoves)
+               
+                if(level.CoTheMoves != null)
                 {
-                    moves.Add(move.Point);
+                    foreach (var move in level.CoTheMoves)
+                    {
+                        moves.Add(move.Point);
+                    }
                 }
                 coTheGameLevels.Add(new CoTheGameLevel
                 {
@@ -226,7 +230,8 @@ namespace CoCaro.Model
                 foreach (var move in gameLevel.Moves)
                 {
                     var coTheMove = new CoTheMove
-                    {
+                    {                        
+                        CoTheLevelId = coTheLevel.Id,
                         Point = move
                     };
                     caroContext.CoTheMoves.Add(coTheMove);

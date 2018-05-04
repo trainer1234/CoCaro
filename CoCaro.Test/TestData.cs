@@ -192,5 +192,28 @@ namespace CoCaro.Test
             yield return new TestCaseData(3, "jkasjkdfjksdjf");
             yield return new TestCaseData(100, "999999");
         }
+
+        public static IEnumerable<TestCaseData> Presenter_CheckGame_Data()
+        {
+            var chessboards = new List<ChessBoard>
+            {
+                new ChessBoard
+                {
+                    Moves = new List<string> { "J5", "J6", "J7", "J8", "J9" }
+                },
+                new ChessBoard
+                {
+                    Moves = new List<string> { "J5", "J6", "J7", "J8", "J9" }
+                },
+                new ChessBoard
+                {
+                    Moves = new List<string> { "J5", "J6", "J7", "J8", "J9" }
+                }
+            };
+
+            yield return new TestCaseData(chessboards[0], 10, 5, 1);
+            yield return new TestCaseData(chessboards[1], 5, 5, -1);
+            yield return new TestCaseData(chessboards[2], 6, 6, -1);
+        }
     }
 }
