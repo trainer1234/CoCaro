@@ -23,6 +23,7 @@ namespace CoCaro.Model
         public int GameDuration { get; set; }
         public DateTime StartTime { get; set; }
         public int Winner { get; set; }
+        public int RemainMoves { get; set; }
         public bool IsCoTheGame { get; set; } = false;
         public ChessBoard()
         {
@@ -33,6 +34,7 @@ namespace CoCaro.Model
             Moves = new List<string>();
             StartTime = DateTime.Now;
             Winner = 0;
+            RemainMoves = -1;
         }
 
         public ChessBoard(int id) : this()

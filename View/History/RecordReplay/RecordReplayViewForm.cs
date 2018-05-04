@@ -39,7 +39,7 @@ namespace CoCaro.View.History.RecordReplay
         {                       
             Label turnLabel = new Label();
             turnLabel.Name = "lblTurn";
-            turnLabel.Text = "Replay Game #" + (chessBoard.Id + 1);
+            turnLabel.Text = "Replay Game #" + (chessBoard.Id);
             turnLabel.Font = new Font("Arial", 16, FontStyle.Bold);
             turnLabel.ForeColor = Color.Blue;
             turnLabel.TextAlign = ContentAlignment.MiddleCenter;

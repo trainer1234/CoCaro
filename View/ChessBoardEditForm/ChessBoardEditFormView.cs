@@ -17,6 +17,7 @@ namespace CoCaro.View.ChessBoardEditForm
         private CoTheGameLevel gameLevel = null;
         private int currentOperation = 1;
         private bool isAddingLevel = false;
+        private int countX = 0, countO = 0;
         public ChessBoardEditFormPresenter Presenter { private get; set; }
         public ChessBoardEditFormView()
         {
@@ -82,24 +83,71 @@ namespace CoCaro.View.ChessBoardEditForm
             btnDelete.Click += btnSelectDeleteOperation_Click;
             Controls.Add(btnDelete);
 
-            Label lblLimitMoves = new Label();
-            lblLimitMoves.Text = "Giới hạn số lượt đi";
-            lblLimitMoves.Font = new Font("Arial", 12, FontStyle.Bold);
-            lblLimitMoves.Width = buttonWidth;
-            lblLimitMoves.Height = buttonHeight / 2;
-            lblLimitMoves.Location = new Point(rightControlX,
+            RadioButton rdbUnlimited = new RadioButton();
+            rdbUnlimited.Name = "rdbUnlimited";
+            rdbUnlimited.Width = buttonWidth;
+            rdbUnlimited.Height = ChessBoard.ChessSize;
+            rdbUnlimited.Text = "Không giới hạn lượt đi";
+            rdbUnlimited.Font = new Font("Arial", 10, FontStyle.Bold);
+            rdbUnlimited.Location = new Point(rightControlX,
                 btnDelete.Location.Y + btnDelete.Height + ChessBoard.ChessSize);
-            Controls.Add(lblLimitMoves);
+            rdbUnlimited.TextAlign = ContentAlignment.MiddleCenter;
+            rdbUnlimited.CheckedChanged += rdbUnlimited_CheckedChanged;
+            Controls.Add(rdbUnlimited);
 
+            RadioButton rdbLimited = new RadioButton();
+            rdbLimited.Width = buttonWidth;
+            rdbLimited.Height = ChessBoard.ChessSize;
+            rdbLimited.Text = "Giới hạn hạn lượt đi";
+            rdbLimited.Font = new Font("Arial", 10, FontStyle.Bold);
+            rdbLimited.Location = new Point(rightControlX,
+                btnDelete.Location.Y + btnDelete.Height + ChessBoard.ChessSize * 2);
+
+            Controls.Add(rdbLimited);
+            
             TextBox txtLimitMoves = new TextBox();
             txtLimitMoves.Name = "txtLimitedMoves";
             txtLimitMoves.Width = buttonWidth;
             txtLimitMoves.Height = buttonHeight;
-            txtLimitMoves.Text = "0";
+            txtLimitMoves.Text = this.gameLevel.LimitedMoves.ToString();
             txtLimitMoves.Font = new Font("Arial", 12, FontStyle.Bold);
             txtLimitMoves.Location = new Point(rightControlX,
-                lblLimitMoves.Location.Y + lblLimitMoves.Height);
+                rdbLimited.Location.Y + rdbLimited.Height);
             Controls.Add(txtLimitMoves);
+
+            Label lblXNumber = new Label();
+            lblXNumber.Name = "lblXNumber";
+            lblXNumber.Width = buttonWidth;
+            lblXNumber.Height = buttonHeight;
+            lblXNumber.Font = new Font("Arial", 12, FontStyle.Bold);
+            lblXNumber.TextAlign = ContentAlignment.MiddleCenter;
+            lblXNumber.Location = new Point(rightControlX, 
+                txtLimitMoves.Location.Y + txtLimitMoves.Height);
+            lblXNumber.ForeColor = Color.Blue;
+            lblXNumber.Text = "Số quân X: " + countX.ToString();
+            Controls.Add(lblXNumber);
+
+            Label lblONumber = new Label();
+            lblONumber.Name = "lblONumber";
+            lblONumber.Width = buttonWidth;
+            lblONumber.Height = buttonHeight;
+            lblONumber.Font = new Font("Arial", 12, FontStyle.Bold);
+            lblONumber.TextAlign = ContentAlignment.MiddleCenter;
+            lblONumber.Location = new Point(rightControlX,
+                lblXNumber.Location.Y + lblXNumber.Height);
+            lblONumber.ForeColor = Color.Orange;
+            lblONumber.Text = "Số quân O: " + countO.ToString();
+            Controls.Add(lblONumber);
+
+            if (gameLevel.LimitedMoves >= 0)
+            {
+                rdbUnlimited.Checked = true;
+                txtLimitMoves.Enabled = false;
+            }
+            else
+            {
+                rdbLimited.Checked = true;
+            }
 
             this.Width = ChessBoard.BoardPaddingLeft +
                 rightControlX + btnDelete.Width;
@@ -133,8 +181,14 @@ namespace CoCaro.View.ChessBoardEditForm
             Controls.Add(btnSaveChange);            
 
             Label title = new Label();
-            title.Text = "Chỉnh sửa level ";
-            title.Text = "Chỉnh sửa level " + gameLevel.Id.ToString();
+            if (this.isAddingLevel)
+            {
+                title.Text = "Thêm mới level";
+            }
+            else
+            {
+                title.Text = "Chỉnh sửa level " + gameLevel.Id.ToString();
+            }            
             title.Font = new Font("Arial", 16, FontStyle.Bold);
             title.ForeColor = Color.Blue;
             title.TextAlign = ContentAlignment.MiddleCenter;
@@ -195,7 +249,10 @@ namespace CoCaro.View.ChessBoardEditForm
             if(gameLevel.Moves != null)
             {
                 foreach(var move in gameLevel.Moves)
-                {                    
+                {
+                    Label lblXNumber = Controls.Find("lblXNumber", false)[0] as Label;
+                    Label lblONumber = Controls.Find("lblONumber", false)[0] as Label;
+
                     int owner = int.Parse(move.Split('_')[0]);
 
                     string sMove = move.Split('_')[1];
@@ -206,10 +263,14 @@ namespace CoCaro.View.ChessBoardEditForm
                         row.ToString() + "_" + column.ToString(), false)[0] as Button;
                     if (owner == 1)
                     {
+                        countX++;
+                        lblXNumber.Text = "Số quân X: " + countX.ToString();
                         btnChess.BackgroundImage = new Bitmap(Properties.Resources.cross);
                     }
                     else if(owner == 2)
                     {
+                        countO++;
+                        lblONumber.Text = "Số quân O: " + countO.ToString();
                         btnChess.BackgroundImage = new Bitmap(Properties.Resources.round);
                     }
                 }
@@ -224,6 +285,9 @@ namespace CoCaro.View.ChessBoardEditForm
         private void btnChess_Click(object sender, EventArgs e)
         {
             Button selectedButton = sender as Button;
+            Label lblXNumber = Controls.Find("lblXNumber", false)[0] as Label;
+            Label lblONumber = Controls.Find("lblONumber", false)[0] as Label;
+
             int row = int.Parse(selectedButton.Name.Split('_')[1]);
             int column = int.Parse(selectedButton.Name.Split('_')[2]);
 
@@ -235,9 +299,15 @@ namespace CoCaro.View.ChessBoardEditForm
                 move += (row).ToString();
                 if(!gameLevel.Moves.Contains("1_" + move))
                 {
+                    countX++;
+                    lblXNumber.Text = "Số quân X: " + countX.ToString();
                     gameLevel.Moves.Add("1_" + move); 
-                }                
-                gameLevel.Moves.Remove("2_" + move);
+                }
+                if (gameLevel.Moves.Remove("2_" + move))
+                {
+                    countO--;
+                    lblONumber.Text = "Số quân O: " + countO.ToString();
+                }
             }
             else if (this.currentOperation == 2)
             {
@@ -247,9 +317,15 @@ namespace CoCaro.View.ChessBoardEditForm
                 move += (row).ToString();
                 if (!gameLevel.Moves.Contains("2_" + move))
                 {
+                    countO++;
                     gameLevel.Moves.Add("2_" + move);
+                    lblONumber.Text = "Số quân O: " + countO.ToString();
                 }
-                gameLevel.Moves.Remove("1_" + move);                
+                if(gameLevel.Moves.Remove("1_" + move))
+                {
+                    countX--;
+                    lblXNumber.Text = "Số quân X: " + countX.ToString();
+                }
             }
             else if (this.currentOperation == 0)
             {
@@ -257,8 +333,18 @@ namespace CoCaro.View.ChessBoardEditForm
                 String move = "";
                 move += ((char)(column - 1 + 'A')).ToString();
                 move += (row).ToString();
-                gameLevel.Moves.Remove("1_" + move);
-                gameLevel.Moves.Remove("2_" + move);
+
+                if(gameLevel.Moves.Remove("1_" + move))
+                {
+                    countX--;
+                    lblXNumber.Text = "Số quân X: " + countX.ToString();
+                }
+                else
+                {
+                    countO--;
+                    lblONumber.Text = "Số quân O: " + countO.ToString();
+                    gameLevel.Moves.Remove("2_" + move);
+                }                
             }
         }
 
@@ -297,6 +383,13 @@ namespace CoCaro.View.ChessBoardEditForm
 
         private void btnSaveChange_Click(object sender, EventArgs e)
         {
+            if(countX > countO + 1 || countO > countX)
+            {
+                MessageBox.Show("Số lương quân cờ không hợp lệ!", "Lỗi", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             TextBox txtLimitedMoves = Controls.Find("txtLimitedMoves", false)[0] as TextBox;
             this.gameLevel.LimitedMoves = int.Parse(txtLimitedMoves.Text);
 
@@ -307,12 +400,28 @@ namespace CoCaro.View.ChessBoardEditForm
             else
             {
                 Presenter.SaveGameLevel(this.gameLevel);
-            }            
+            }
+            this.Close();
         }
 
         private void btnDeleteLevel_Click(object sender, EventArgs e)
         {
             Presenter.DeleteGameLevel(this.gameLevel.Id);
+            this.Close();
+        }
+
+        private void rdbUnlimited_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton rdbUnlimited = Controls.Find("rdbUnlimited", false)[0] as RadioButton;
+            TextBox txtLimitedMoves = Controls.Find("txtLimitedMoves", false)[0] as TextBox;
+            if (rdbUnlimited.Checked)
+            {
+                txtLimitedMoves.Enabled = false;
+            }
+            else
+            {
+                txtLimitedMoves.Enabled = true;
+            }
         }
     }
 }

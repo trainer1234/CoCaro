@@ -51,7 +51,7 @@ namespace CoCaro.View.PlayWithCom
         }
 
         public void initBoard()
-        {
+        {            
             this.Width = 2 * ChessBoard.BoardPaddingLeft +
                 ChessBoard.ChessSize * ChessBoard.BoardColumns;
 
@@ -71,7 +71,7 @@ namespace CoCaro.View.PlayWithCom
             turnLabel.Location = new Point(0,
                 ChessBoard.BoardPaddingTop - ChessBoard.ChessSize * 3);
             Controls.Add(turnLabel);
-
+            
             Label timeLabel = new Label();
             timeLabel.Name = "lblTime";
             timeLabel.Text = ChessBoard.MoveTime.ToString();
@@ -218,9 +218,14 @@ namespace CoCaro.View.PlayWithCom
             }
             else
             {
-                if (chessBoard.TurnOwner == 1)
+                if (chessBoard.TurnOwner == 1 || 
+                    chessBoard.RemainMoves == 0)
                 {
-                    s = "Bạn đã thua!";
+                    s = "Bạn đã thua! ";
+                    if(chessBoard.RemainMoves == 0)
+                    {
+                        s += "(Hết lượt đi)";
+                    }
                     label.ForeColor = Color.Blue;
                     label.Text = s;
                     chessBoard.Winner = 1;
@@ -254,11 +259,14 @@ namespace CoCaro.View.PlayWithCom
 
         private void initBoardCoThe()
         {
+            chessBoard = Presenter.CreateNewGame(true);
+            chessBoard.RemainMoves = coTheLevel.LimitedMoves;
+
             this.Width = 2 * ChessBoard.BoardPaddingLeft +
                 ChessBoard.ChessSize * ChessBoard.BoardColumns;
 
             this.Height = 2 * ChessBoard.BoardPaddingTop +
-                ChessBoard.ChessSize * ChessBoard.BoardRows;            
+                ChessBoard.ChessSize * (ChessBoard.BoardRows + 2);            
 
             Label turnLabel = new Label();
             turnLabel.Name = "lblTurn";
@@ -281,6 +289,20 @@ namespace CoCaro.View.PlayWithCom
                 ChessBoard.BoardPaddingTop - ChessBoard.ChessSize * 3);
             Controls.Add(turnLabel);
 
+            Label remainMoves = new Label();
+            remainMoves.Name = "lblRemainMoves";
+            remainMoves.Text = "Số lượt đi còn lại: " + 
+                (chessBoard.RemainMoves == -1 ? "Không giới hạn": 
+                chessBoard.RemainMoves.ToString());
+            remainMoves.Font = new Font("Arial", 16, FontStyle.Bold);
+            remainMoves.ForeColor = Color.Blue;
+            remainMoves.TextAlign = ContentAlignment.MiddleCenter;
+            remainMoves.Width = this.Width;
+            remainMoves.Height = 30;
+            remainMoves.Location = new Point(0,
+                ChessBoard.BoardPaddingTop - ChessBoard.ChessSize * 2);
+            Controls.Add(remainMoves);
+
             Label timeLabel = new Label();
             timeLabel.Name = "lblTime";
             timeLabel.Text = ChessBoard.MoveTime.ToString();
@@ -290,13 +312,13 @@ namespace CoCaro.View.PlayWithCom
             timeLabel.Width = 40;
             timeLabel.Height = 30;
             timeLabel.Location = new Point(ChessBoard.BoardPaddingLeft,
-                ChessBoard.BoardPaddingTop - ChessBoard.ChessSize * 2);
+                ChessBoard.BoardPaddingTop - ChessBoard.ChessSize);
             Controls.Add(timeLabel);
 
             ProgressBar progressBar = new ProgressBar();
             progressBar.Name = "prgTime";
             progressBar.Location = new Point(ChessBoard.BoardPaddingLeft + timeLabel.Width,
-                ChessBoard.BoardPaddingTop - ChessBoard.ChessSize * 2);
+                ChessBoard.BoardPaddingTop - ChessBoard.ChessSize);
             progressBar.Width = ChessBoard.BoardColumns * ChessBoard.ChessSize - timeLabel.Width;
             progressBar.Value = 100;
             Controls.Add(progressBar);
@@ -345,8 +367,7 @@ namespace CoCaro.View.PlayWithCom
             
             timerTurn.Start();
             timerGameDuration.Start();
-
-            chessBoard = Presenter.CreateNewGame(true);
+            
             for(int i = 0; i < coTheLevel.Moves.Count; i++)
             {
                 int turnOwner = int.Parse(coTheLevel.Moves[i].Split('_')[0]);
@@ -388,7 +409,11 @@ namespace CoCaro.View.PlayWithCom
 
             //MessageBox.Show(row.ToString() + " " + column.ToString());            
 
-            clickedButton.BackgroundImage = new Bitmap(Properties.Resources.round);            
+            clickedButton.BackgroundImage = new Bitmap(Properties.Resources.round);
+
+            chessBoard.RemainMoves--;
+            Label lblRemainMoves = Controls.Find("lblRemainMoves", false)[0] as Label;
+            lblRemainMoves.Text = "Số lượt đi còn lại: " + chessBoard.RemainMoves;
 
             Presenter.StoreMove(this.chessBoard.Id, row, column);
             int result = Presenter.CheckGame(chessBoard, row, column);
@@ -398,6 +423,11 @@ namespace CoCaro.View.PlayWithCom
             }
             else
             {
+                if(chessBoard.RemainMoves == 0)
+                {
+                    EndGame(1, false);
+                    return;
+                }
                 ChangeTurn();
                 Presenter.ComputerMove(chessBoard);                
             }
