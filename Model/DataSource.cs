@@ -98,16 +98,19 @@ namespace CoCaro.Model
                 games = games.OrderByDescending(game => game.StartTime);
                 foreach (var match in games)
                 {
-                    var chessboard = new ChessBoard
+                    if(match.Duration != 0)
                     {
-                        Id = match.Id,
-                        IsEnd = true,
-                        GameDuration = match.Duration,
-                        StartTime = match.StartTime,                        
-                        Moves = match.Moves.Select(move => move.Point).ToList(),
-                        Winner = match.Winner
-                    };
-                    chessboards.Add(chessboard);
+                        var chessboard = new ChessBoard
+                        {
+                            Id = match.Id,
+                            IsEnd = true,
+                            GameDuration = match.Duration,
+                            StartTime = match.StartTime,
+                            Moves = match.Moves.Select(move => move.Point).ToList(),
+                            Winner = match.Winner
+                        };
+                        chessboards.Add(chessboard);
+                    }                    
                 }
             }
 
