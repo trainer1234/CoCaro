@@ -77,13 +77,13 @@ namespace CoCaro.View.MainForm
                     break;
                 }
                 Button btnLevel = new Button();
-                btnLevel.Name = "btnLevel_" + i.ToString();
+                btnLevel.Name = "btnLevel_" + gameLevels[i].Id.ToString();
                 btnLevel.Width = buttonSize;
                 btnLevel.Height = buttonSize;
                 btnLevel.Location = new Point(paddingLeft + 2 * buttonSize * (i % levelsInRow),
                     paddingTop + 2 * buttonSize * (i / levelsInRow));
                 btnLevel.Font = new Font("Arial", 16, FontStyle.Bold);
-                btnLevel.Text = (i + 1).ToString();
+                btnLevel.Text = (gameLevels[i].Id).ToString();
                 btnLevel.Click += btnLevel_Click;
 
                 Controls.Add(btnLevel);
@@ -95,8 +95,20 @@ namespace CoCaro.View.MainForm
             Button selectedButton = sender as Button;
             int index = int.Parse(selectedButton.Name.Split('_')[1]);
 
-            ChessBoardEditFormView form = new ChessBoardEditFormView(gameLevels[index]);
-            form.Show();
+            CoTheGameLevel coTheGame = null;
+            foreach(var game in gameLevels)
+            {
+                if(game.Id == index)
+                {
+                    coTheGame = game;
+                    break;
+                }
+            }
+            if(coTheGame != null)
+            {
+                ChessBoardEditFormView form = new ChessBoardEditFormView(coTheGame);
+                form.Show();
+            }            
         }
 
         private void btnNewLevel_Click(object sender, EventArgs e)

@@ -221,9 +221,10 @@ namespace CoCaro.Presenter.PlayWIthCom
             }
         }
 
-        public ChessBoard CreateNewGame(bool isCoThe)
+        public ChessBoard CreateNewGame(bool isCoThe, int coTheGameId = -1)
         {
-            _ChessBoard = dataSource.CreateNewGame(isCoThe);
+            _ChessBoard = dataSource.CreateNewGame(isCoThe,
+               coTheGameId);
             return _ChessBoard;
         }
 
@@ -236,6 +237,7 @@ namespace CoCaro.Presenter.PlayWIthCom
         {
             _ChessBoard.Chesses[row, column].Owner = _ChessBoard.TurnOwner;
             string move = "";
+            move += _ChessBoard.TurnOwner.ToString() + "_";
             move += ((char)(column - 1 + 'A')).ToString();
             move += (row).ToString();
             //MessageBox.Show(move);
@@ -249,7 +251,8 @@ namespace CoCaro.Presenter.PlayWIthCom
         public void ComputerMove(ChessBoard chessBoard)
         {
             this._ChessBoard = chessBoard;
-            if (_ChessBoard.Moves.Count == 0)
+            if (chessBoard.Chesses[ChessBoard.BoardRows / 2, 
+                ChessBoard.BoardColumns / 2].Owner == 0)
             {
                 view.ComSetChess(ChessBoard.BoardRows / 2, ChessBoard.BoardColumns / 2);
             }

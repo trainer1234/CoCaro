@@ -17,6 +17,7 @@ namespace CoCaro.DAL.Models
         public DateTime StartTime { get; set; }
         public int Duration { get; set; }
         public List<Move> Moves { get; set; }
+        public int? CoTheGameId { get; set; }
         public bool? IsCoTheGame { get; set; } = false;
     }
 }

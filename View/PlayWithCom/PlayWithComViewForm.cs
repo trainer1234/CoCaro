@@ -259,7 +259,7 @@ namespace CoCaro.View.PlayWithCom
 
         private void initBoardCoThe()
         {
-            chessBoard = Presenter.CreateNewGame(true);
+            chessBoard = Presenter.CreateNewGame(true, coTheLevel.Id);
             chessBoard.RemainMoves = coTheLevel.LimitedMoves;
 
             this.Width = 2 * ChessBoard.BoardPaddingLeft +
@@ -292,7 +292,7 @@ namespace CoCaro.View.PlayWithCom
             Label remainMoves = new Label();
             remainMoves.Name = "lblRemainMoves";
             remainMoves.Text = "Số lượt đi còn lại: " + 
-                (chessBoard.RemainMoves == -1 ? "Không giới hạn": 
+                (chessBoard.RemainMoves < 0 ? "Không giới hạn": 
                 chessBoard.RemainMoves.ToString());
             remainMoves.Font = new Font("Arial", 16, FontStyle.Bold);
             remainMoves.ForeColor = Color.Blue;
@@ -367,16 +367,18 @@ namespace CoCaro.View.PlayWithCom
             
             timerTurn.Start();
             timerGameDuration.Start();
-            
-            for(int i = 0; i < coTheLevel.Moves.Count; i++)
+
+            for (int i = 0; i < coTheLevel.Moves.Count; i++)
             {
                 int turnOwner = int.Parse(coTheLevel.Moves[i].Split('_')[0]);
                 string move = coTheLevel.Moves[i].Split('_')[1];
                 int column = move[0] - 'A' + 1;
                 int row = int.Parse(move.Substring(1));
+                chessBoard.InitMoves.Add(turnOwner.ToString() + "_" + move);
+
                 chessBoard.Chesses[row, column].Owner = turnOwner;
                 Button chess = Controls.Find("Chess_" + row.ToString() + "_" + column.ToString(),
-                            false)[0] as Button;                
+                            false)[0] as Button;
                 if (turnOwner == 1)
                 {
                     chess.BackgroundImage = new Bitmap(Properties.Resources.cross);
@@ -385,7 +387,7 @@ namespace CoCaro.View.PlayWithCom
                 {
                     chess.BackgroundImage = new Bitmap(Properties.Resources.round);
                 }
-            }            
+            }
         }
 
         private void PlayWithComViewForm_Load(object sender, EventArgs e)
@@ -411,9 +413,14 @@ namespace CoCaro.View.PlayWithCom
 
             clickedButton.BackgroundImage = new Bitmap(Properties.Resources.round);
 
-            chessBoard.RemainMoves--;
-            Label lblRemainMoves = Controls.Find("lblRemainMoves", false)[0] as Label;
-            lblRemainMoves.Text = "Số lượt đi còn lại: " + chessBoard.RemainMoves;
+            if (chessBoard.IsCoTheGame)
+            {
+                chessBoard.RemainMoves--;
+                Label lblRemainMoves = Controls.Find("lblRemainMoves", false)[0] as Label;
+                lblRemainMoves.Text = "Số lượt đi còn lại: " +
+                (chessBoard.RemainMoves < 0 ? "Không giới hạn" :
+                chessBoard.RemainMoves.ToString());
+            }            
 
             Presenter.StoreMove(this.chessBoard.Id, row, column);
             int result = Presenter.CheckGame(chessBoard, row, column);

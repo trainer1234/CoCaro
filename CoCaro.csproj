@@ -90,6 +90,10 @@
     <Compile Include="Migrations\201805031545459_AddIsCoTheGameFieldInGameTable.Designer.cs">
       <DependentUpon>201805031545459_AddIsCoTheGameFieldInGameTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805041315481_AddCoTheGameIdField.cs" />
+    <Compile Include="Migrations\201805041315481_AddCoTheGameIdField.Designer.cs">
+      <DependentUpon>201805041315481_AddCoTheGameIdField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Chess.cs" />
     <Compile Include="Model\ChessBoard.cs" />
@@ -178,6 +182,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805031545459_AddIsCoTheGameFieldInGameTable.resx">
       <DependentUpon>201805031545459_AddIsCoTheGameFieldInGameTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805041315481_AddCoTheGameIdField.resx">
+      <DependentUpon>201805041315481_AddCoTheGameIdField.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
