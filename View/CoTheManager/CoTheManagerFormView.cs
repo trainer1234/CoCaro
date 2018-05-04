@@ -46,6 +46,16 @@ namespace CoCaro.View.MainForm
 
             Controls.Add(title);
 
+            Button btnRefresh = new Button();
+            btnRefresh.Width = 100;
+            btnRefresh.Height = 40;
+            btnRefresh.Location = new Point(this.Width - paddingLeft - 20, title.Location.Y - 20);
+            btnRefresh.Font = new Font("Arial", 14, FontStyle.Regular);
+            btnRefresh.TextAlign = ContentAlignment.MiddleCenter;
+            btnRefresh.Text = "Refresh";
+
+            Controls.Add(btnRefresh);
+
             for (int i = 0; i <= gameLevels.Count; i++)
             {
                 if(i == gameLevels.Count)

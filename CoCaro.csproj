@@ -268,5 +268,11 @@
   <ItemGroup>
     <None Include="CoTheManager\Resources\save1.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="CoTheManager\Resources\delete2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CoTheManager\Resources\remove2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
