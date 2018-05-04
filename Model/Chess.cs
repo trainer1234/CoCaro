@@ -22,14 +22,14 @@ namespace CoCaro.Model
         public Chess(int column, int row, int owner)
         {
             this.Column = column;
-            this.Row = row;           
+            this.Row = row;
             this.Owner = owner;
         }
 
         public Chess(int column, int row, int owner, bool isInit)
         {
             this.Column = column;
-            this.Row = row;            
+            this.Row = row;
             this.Owner = owner;
             this.IsInit = isInit;
         }
