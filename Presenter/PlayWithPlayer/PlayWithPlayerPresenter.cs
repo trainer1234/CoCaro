@@ -32,7 +32,7 @@ namespace CoCaro.Presenter.PlayWithPlayer
             {
                 return 0;
             }
-            if (CheckHorizontal() || CheckVertical() ||
+            if (CheckHorizontal() || CheckVertical(chessBoard) ||
                 CheckInclined() || CheckReverseInclined())
             {
                 return 1;
@@ -176,7 +176,7 @@ namespace CoCaro.Presenter.PlayWithPlayer
             }
         }
 
-        public bool CheckVertical()
+        public bool CheckVertical(ChessBoard chessBoard)
         {
             int count = 1;
             for (int i = 1; count < 5; i++, count++)
@@ -185,7 +185,7 @@ namespace CoCaro.Presenter.PlayWithPlayer
                 {
                     break;
                 }
-                Chess chess = _ChessBoard.Chesses[LastMove.Row + i, LastMove.Column];
+                Chess chess = chessBoard.Chesses[LastMove.Row + i, LastMove.Column];
                 if (chess.Owner != LastMove.Owner)
                 {
                     break;
@@ -203,7 +203,7 @@ namespace CoCaro.Presenter.PlayWithPlayer
                     {
                         break;
                     }
-                    Chess chess = _ChessBoard.Chesses[LastMove.Row - i, LastMove.Column];
+                    Chess chess = chessBoard.Chesses[LastMove.Row - i, LastMove.Column];
                     if (chess.Owner != LastMove.Owner)
                     {
                         break;

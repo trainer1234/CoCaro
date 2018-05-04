@@ -13,7 +13,7 @@ namespace CoCaro.Presenter.PlayWithPlayer
         void EndGame(int id, int winner, int duration);
         void StoreMove(int id, int row, int column);
         int CheckGame(ChessBoard chessBoard, int row, int column);
-        bool CheckVertical();
+        bool CheckVertical(ChessBoard chessBoard);
         bool CheckHorizontal();
         bool CheckInclined();
         bool CheckReverseInclined();

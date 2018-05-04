@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CoCaro.Presenter.History
 {
-    interface IHistoryPresenter
+    public interface IHistoryPresenter
     {
         void GetHistory();
     }
