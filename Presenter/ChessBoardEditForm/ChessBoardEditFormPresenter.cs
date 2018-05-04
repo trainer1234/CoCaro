@@ -13,6 +13,7 @@ namespace CoCaro.Presenter.ChessBoardEditForm
             this.view = view;
             this.dataSource = dataSource;
         }
+        //ChessBoard Editor
         public void AddGameLevel(CoTheGameLevel gameLevel)
         {
             dataSource.AddCoTheLevel(gameLevel);
