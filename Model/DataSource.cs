@@ -254,9 +254,9 @@ namespace CoCaro.Model
                     var levelToDelete = gameLevel.SingleOrDefault(level => level.Id == gameLevelId);
                     if (levelToDelete != null)
                     {
-                        foreach (var move in levelToDelete.CoTheMoves)
+                        for (int i = 0; i < levelToDelete.CoTheMoves.Count; i++)
                         {
-                            caroContext.CoTheMoves.Remove(move);
+                            caroContext.CoTheMoves.Remove(levelToDelete.CoTheMoves[i]);
                         }
                         //caroContext.SaveChanges();
 

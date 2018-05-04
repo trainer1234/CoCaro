@@ -14,7 +14,7 @@ namespace CoCaro.View.ChessBoardEditForm
 {
     public partial class ChessBoardEditFormView : Form, IChessBoardEditFormView
     {
-        private CoTheGameLevel gameLevel;
+        private CoTheGameLevel gameLevel = null;
         private int currentOperation = 1;
         private bool isAddingLevel = false;
         public ChessBoardEditFormPresenter Presenter { private get; set; }
@@ -22,12 +22,17 @@ namespace CoCaro.View.ChessBoardEditForm
         {
             InitializeComponent();
             Presenter = new ChessBoardEditFormPresenter(this, Program.DataSource);
-            this.isAddingLevel = true;
-            this.gameLevel = new CoTheGameLevel();
+            
+            if(gameLevel == null)
+            {
+                this.isAddingLevel = true;
+                this.gameLevel = new CoTheGameLevel();
+            }            
         }        
 
         public ChessBoardEditFormView(CoTheGameLevel gameLevel) : this()
         {
+            this.isAddingLevel = false;
             this.gameLevel = gameLevel;
         }
 
@@ -70,7 +75,7 @@ namespace CoCaro.View.ChessBoardEditForm
             btnDelete.Height = buttonHeight;
             btnDelete.Text = "Xóa";
             btnDelete.Font = new Font("Arial", 12, FontStyle.Bold);
-            //btnDelete.Image = new Bitmap(Properties.Resources.);
+            btnDelete.Image = new Bitmap(Properties.Resources.remove);
             btnDelete.ImageAlign = ContentAlignment.MiddleLeft;
             btnDelete.Location = new Point(rightControlX,
                 btnSelectO.Location.Y + btnSelectO.Height);
@@ -107,7 +112,7 @@ namespace CoCaro.View.ChessBoardEditForm
             btnDeleteLevel.Text = "Xóa Level";
             btnDeleteLevel.Font = new Font("Arial", 12, FontStyle.Bold);
             btnDeleteLevel.ForeColor = Color.Red;
-            //btnDeleteLevel.Image = new Bitmap(Properties.Resources.delete);
+            btnDeleteLevel.Image = new Bitmap(Properties.Resources.delete);
             btnDeleteLevel.ImageAlign = ContentAlignment.MiddleLeft;
             btnDeleteLevel.Location = new Point(rightControlX,
                 this.Height - ChessBoard.BoardPaddingTop - btnDeleteLevel.Height);
@@ -129,7 +134,7 @@ namespace CoCaro.View.ChessBoardEditForm
 
             Label title = new Label();
             title.Text = "Chỉnh sửa level ";
-            //title.Text = "Chỉnh sửa level " + chessBoard.Id.ToString();
+            title.Text = "Chỉnh sửa level " + gameLevel.Id.ToString();
             title.Font = new Font("Arial", 16, FontStyle.Bold);
             title.ForeColor = Color.Blue;
             title.TextAlign = ContentAlignment.MiddleCenter;
