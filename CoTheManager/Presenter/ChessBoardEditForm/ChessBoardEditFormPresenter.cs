@@ -18,7 +18,7 @@ namespace CoTheManager.Presenter.ChessBoardEditForm
             this.view = view;
             this.dataSource = dataSource;
         }
-        public void AddGameLevel(ChessBoard gameLevel)
+        public void AddGameLevel(CoTheGameLevel gameLevel)
         {
             dataSource.AddCoTheLevel(gameLevel);
         }
@@ -28,7 +28,7 @@ namespace CoTheManager.Presenter.ChessBoardEditForm
             dataSource.DeleteCoTheLevel(gameLevelId);
         }
 
-        public void SaveGameLevel(ChessBoard gameLevel)
+        public void SaveGameLevel(CoTheGameLevel gameLevel)
         {
             dataSource.SaveCoTheLevel(gameLevel);
         }

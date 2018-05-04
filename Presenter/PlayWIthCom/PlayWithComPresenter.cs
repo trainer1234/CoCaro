@@ -221,9 +221,9 @@ namespace CoCaro.Presenter.PlayWIthCom
             }
         }
 
-        public ChessBoard CreateNewGame()
+        public ChessBoard CreateNewGame(bool isCoThe)
         {
-            _ChessBoard = dataSource.CreateNewGame();
+            _ChessBoard = dataSource.CreateNewGame(isCoThe);
             return _ChessBoard;
         }
 

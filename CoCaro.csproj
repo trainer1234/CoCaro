@@ -86,24 +86,39 @@
     <Compile Include="Migrations\201805021600477_AddCoTheLevelAndCoTheMoveTable.Designer.cs">
       <DependentUpon>201805021600477_AddCoTheLevelAndCoTheMoveTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805031545459_AddIsCoTheGameFieldInGameTable.cs" />
+    <Compile Include="Migrations\201805031545459_AddIsCoTheGameFieldInGameTable.Designer.cs">
+      <DependentUpon>201805031545459_AddIsCoTheGameFieldInGameTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Chess.cs" />
     <Compile Include="Model\ChessBoard.cs" />
-    <Compile Include="Model\CoTheChessboard.cs" />
+    <Compile Include="Model\CoTheGameLevel.cs" />
     <Compile Include="Model\DataSource.cs" />
     <Compile Include="Model\IDataSource.cs" />
+    <Compile Include="Presenter\ChessBoardEditForm\ChessBoardEditFormPresenter.cs" />
+    <Compile Include="Presenter\ChessBoardEditForm\IChessBoardEditFormPresenter.cs" />
     <Compile Include="Presenter\CoThe\CoThePresenter.cs" />
     <Compile Include="Presenter\CoThe\ICoThePresenter.cs" />
     <Compile Include="Presenter\History\HistoryPresenter.cs" />
     <Compile Include="Presenter\History\IHistoryPresenter.cs" />
     <Compile Include="Presenter\History\RecordReplay\IRecordReplayPresenter.cs" />
     <Compile Include="Presenter\History\RecordReplay\RecordReplayPresenter.cs" />
+    <Compile Include="Presenter\CoTheManager\ICoTheMangerPresenter.cs" />
+    <Compile Include="Presenter\CoTheManager\CoTheManagerPresenter.cs" />
     <Compile Include="Presenter\PlayWIthCom\IPlayWithComPresenter.cs" />
     <Compile Include="Presenter\PlayWIthCom\PlayWithComPresenter.cs" />
     <Compile Include="Presenter\PlayWithPlayer\IPlayWithPlayerPresenter.cs" />
     <Compile Include="Presenter\PlayWithPlayer\PlayWithPlayerPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\ChessBoardEditForm\ChessBoardEditFormView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ChessBoardEditForm\ChessBoardEditFormView.Designer.cs">
+      <DependentUpon>ChessBoardEditFormView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChessBoardEditForm\IChessBoardEditFormView.cs" />
     <Compile Include="View\CoThe\CoTheViewForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,6 +146,13 @@
     <Compile Include="View\History\Record\RecordViewUserControl.Designer.cs">
       <DependentUpon>RecordViewUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\CoTheManager\ICoTheManagerView.cs" />
+    <Compile Include="View\CoTheManager\CoTheManagerFormView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CoTheManager\CoTheManagerFormView.Designer.cs">
+      <DependentUpon>CoTheManagerFormView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\PlayWithCom\IPlayWithComView.cs" />
     <Compile Include="View\PlayWithCom\PlayWithComViewForm.cs">
       <SubType>Form</SubType>
@@ -154,6 +176,9 @@
     <EmbeddedResource Include="Migrations\201805021600477_AddCoTheLevelAndCoTheMoveTable.resx">
       <DependentUpon>201805021600477_AddCoTheLevelAndCoTheMoveTable.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805031545459_AddIsCoTheGameFieldInGameTable.resx">
+      <DependentUpon>201805031545459_AddIsCoTheGameFieldInGameTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -164,6 +189,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\ChessBoardEditForm\ChessBoardEditFormView.resx">
+      <DependentUpon>ChessBoardEditFormView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\CoThe\CoTheViewForm.resx">
       <DependentUpon>CoTheViewForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -175,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\History\Record\RecordViewUserControl.resx">
       <DependentUpon>RecordViewUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CoTheManager\CoTheManagerFormView.resx">
+      <DependentUpon>CoTheManagerFormView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\PlayWithCom\PlayWithComViewForm.resx">
       <DependentUpon>PlayWithComViewForm.cs</DependentUpon>
@@ -212,6 +243,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\caro-background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CoTheManager\Resources\blue-cross1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CoTheManager\Resources\cross1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CoTheManager\Resources\delete1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CoTheManager\Resources\orange-circle1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CoTheManager\Resources\remove1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CoTheManager\Resources\round1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CoTheManager\Resources\save1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

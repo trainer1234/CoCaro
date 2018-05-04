@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CoCaro.Presenter.PlayWithPlayer
 {
-    class PlayWithPlayerPresenter : IPlayWithPlayerPresenter
+    public class PlayWithPlayerPresenter : IPlayWithPlayerPresenter
     {
         private IPlayWithPlayerView view;
         private IDataSource dataSource;
@@ -222,7 +222,7 @@ namespace CoCaro.Presenter.PlayWithPlayer
 
         public ChessBoard CreateNewGame()
         {
-            return dataSource.CreateNewGame();
+            return dataSource.CreateNewGame(false);
         }
 
         public void EndGame(int id, int winner, int duration)

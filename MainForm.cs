@@ -1,5 +1,6 @@
 ﻿using CoCaro.View.CoThe;
 using CoCaro.View.History;
+using CoCaro.View.MainForm;
 using CoCaro.View.PlayWithCom;
 using CoCaro.View.PlayWithPlayer;
 using System;
@@ -48,6 +49,17 @@ namespace CoCaro
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }        
+        }
+
+        private void btnCoTheManager_Click(object sender, EventArgs e)
+        {
+            CoTheManagerFormView form = new CoTheManagerFormView();
+            form.Show();
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

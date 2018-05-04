@@ -32,7 +32,7 @@ namespace CoCaro.Model
             //this.ChessBoards.Add(new ChessBoard(6));
         }
 
-        public ChessBoard CreateNewGame()
+        public ChessBoard CreateNewGame(bool isCoThe)
         {
             Game newGame = new Game
             {
@@ -136,34 +136,139 @@ namespace CoCaro.Model
             }
         }
 
-        public CoTheLevel[] GetAllCoTheGameLevels()
+        public List<CoTheGameLevel> GetAllCoTheGameLevels()
         {
-            CoTheLevel[] coTheLevels = new CoTheLevel[20];
+            //CoTheGameLevel[] coTheLevels = new CoTheGameLevel[20];
 
-            List<CoTheMove> initMoves = new List<CoTheMove>();
-            initMoves.Add(new CoTheMove("J10"));
-            initMoves.Add(new CoTheMove("H10"));
-            initMoves.Add(new CoTheMove("J11"));
-            initMoves.Add(new CoTheMove("H11"));
-            initMoves.Add(new CoTheMove("J12"));
-            initMoves.Add(new CoTheMove("H12"));
-            coTheLevels[0] = new CoTheLevel(1, initMoves, 5);            
-            return coTheLevels;
+            //List<string> initMoves = new List<string>();
+            //initMoves.Add("1_J10");
+            //initMoves.Add("2_H10");
+            //initMoves.Add("1_J11");
+            //initMoves.Add("2_H11");
+            //initMoves.Add("1_J12");
+            //initMoves.Add("2_H12");
+            //coTheLevels[0] = new CoTheGameLevel(1, initMoves, 5);            
+            var coTheLevels = caroContext.CoTheLevels.Include(level => level.CoTheMoves).ToList();
+            List<CoTheGameLevel> coTheGameLevels = new List<CoTheGameLevel>();
+
+            foreach (var level in coTheLevels)
+            {
+                List<string> moves = new List<string>();
+               
+                if(level.CoTheMoves != null)
+                {
+                    foreach (var move in level.CoTheMoves)
+                    {
+                        moves.Add(move.Point);
+                    }
+                }
+                coTheGameLevels.Add(new CoTheGameLevel
+                {
+                    Id = level.Id,
+                    Moves = moves,
+                    LimitedMoves = level.LimitedMove
+                });
+            }
+
+            return coTheGameLevels;
         }
 
-        public void SaveCoTheLevel(ChessBoard gameLevel)
+        public void SaveCoTheLevel(CoTheGameLevel gameLevel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var coTheLevels = caroContext.CoTheLevels.Include(level => level.CoTheMoves);
+                if(coTheLevels != null)
+                {
+                    var levelToModify = coTheLevels.SingleOrDefault(level => level.Id == gameLevel.Id);
+                    if(levelToModify != null)
+                    {
+                        var coTheMoves = caroContext.CoTheMoves.ToList();
+                        var coTheMovesToModify = levelToModify.CoTheMoves.Select(move => move.Point).ToList();
+
+                        // find differences between two lists
+                        var movesToDelete = coTheMovesToModify.Except(gameLevel.Moves);
+                        foreach (var move in movesToDelete)
+                        {
+                            var moveToDelete = coTheMoves.SingleOrDefault(m =>
+                                m.CoTheLevelId == levelToModify.Id && m.Point == move);
+                            caroContext.CoTheMoves.Remove(moveToDelete);
+                        }
+
+                        var movesToAdd = gameLevel.Moves.Except(coTheMovesToModify);
+                        foreach (var move in movesToAdd)
+                        {
+                            var moveToAdd = new CoTheMove
+                            {
+                                CoTheLevelId = levelToModify.Id,
+                                Point = move
+                            };
+                            caroContext.CoTheMoves.Add(moveToAdd);
+                        }
+
+                        caroContext.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
-        public void AddCoTheLevel(ChessBoard gameLevel)
+        public void AddCoTheLevel(CoTheGameLevel gameLevel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var coTheLevel = new CoTheLevel
+                {
+                    LimitedMove = gameLevel.LimitedMoves
+                };
+                caroContext.CoTheLevels.Add(coTheLevel);
+                caroContext.SaveChanges();
+
+                foreach (var move in gameLevel.Moves)
+                {
+                    var coTheMove = new CoTheMove
+                    {                        
+                        CoTheLevelId = coTheLevel.Id,
+                        Point = move
+                    };
+                    caroContext.CoTheMoves.Add(coTheMove);
+                }
+                caroContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public void DeleteCoTheLevel(int gameLevelId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var gameLevel = caroContext.CoTheLevels.Include(level => level.CoTheMoves);
+                if (gameLevel != null)
+                {
+                    var levelToDelete = gameLevel.SingleOrDefault(level => level.Id == gameLevelId);
+                    if (levelToDelete != null)
+                    {
+                        foreach (var move in levelToDelete.CoTheMoves)
+                        {
+                            caroContext.CoTheMoves.Remove(move);
+                        }
+                        //caroContext.SaveChanges();
+
+                        caroContext.CoTheLevels.Remove(levelToDelete);
+                        caroContext.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

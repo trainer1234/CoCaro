@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CoCaro.View.PlayWithPlayer
 {
-    interface IPlayWithPlayerView
+    public interface IPlayWithPlayerView
     {
         PlayWithPlayerPresenter Presenter { set; }
         void initBoard();

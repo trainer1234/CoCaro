@@ -14,7 +14,7 @@ namespace CoTheManager.View.ChessBoardEditForm
 {
     public partial class ChessBoardEditFormView : Form, IChessBoardEditFormView
     {
-        private ChessBoard gameLevel;
+        private CoTheGameLevel gameLevel;
         private int currentOperation = 1;
         private bool isAddingLevel = false;
         public ChessBoardEditFormPresenter Presenter { private get; set; }
@@ -22,10 +22,10 @@ namespace CoTheManager.View.ChessBoardEditForm
         {
             InitializeComponent();
             this.isAddingLevel = true;
-            this.gameLevel = new ChessBoard();
+            this.gameLevel = new CoTheGameLevel();
         }        
 
-        public ChessBoardEditFormView(ChessBoard gameLevel) : this()
+        public ChessBoardEditFormView(CoTheGameLevel gameLevel) : this()
         {
             this.gameLevel = gameLevel;
         }
@@ -176,9 +176,7 @@ namespace CoTheManager.View.ChessBoardEditForm
                         ChessBoard.BoardPaddingTop + ChessBoard.ChessSize * (i - 1));
                     button.BackgroundImageLayout = ImageLayout.Stretch;
                     button.Click += btnChess_Click;
-                    Controls.Add(button);
-
-                    gameLevel.Chesses[i, j] = new Chess(j, i, 0);
+                    Controls.Add(button);                    
                 }
             }            
         }
@@ -196,30 +194,28 @@ namespace CoTheManager.View.ChessBoardEditForm
 
             if(this.currentOperation == 1)
             {
-                selectedButton.BackgroundImage = new Bitmap(Properties.Resources.cross);
-                gameLevel.Chesses[row, column].Owner = 1;
+                selectedButton.BackgroundImage = new Bitmap(Properties.Resources.cross);                
                 String move = "";
                 move += ((char)(column - 1 + 'A')).ToString();
                 move += (row).ToString();
-                gameLevel.Moves.Add(move);
+                gameLevel.Moves.Add("1_" + move);
             }
             else if (this.currentOperation == 2)
             {
-                selectedButton.BackgroundImage = new Bitmap(Properties.Resources.round);
-                gameLevel.Chesses[row, column].Owner = 2;
+                selectedButton.BackgroundImage = new Bitmap(Properties.Resources.round);                
                 String move = "";
                 move += ((char)(column - 1 + 'A')).ToString();
                 move += (row).ToString();
-                gameLevel.Moves.Add(move);
+                gameLevel.Moves.Add("2_" + move);
             }
             else if (this.currentOperation == 0)
             {
-                selectedButton.BackgroundImage = null;
-                gameLevel.Chesses[row, column].Owner = 0;
+                selectedButton.BackgroundImage = null;                
                 String move = "";
                 move += ((char)(column - 1 + 'A')).ToString();
                 move += (row).ToString();
-                gameLevel.Moves.Remove(move);
+                gameLevel.Moves.Remove("1_" + move);
+                gameLevel.Moves.Remove("2_" + move);
             }
         }
 
