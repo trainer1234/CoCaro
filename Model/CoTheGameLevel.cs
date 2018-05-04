@@ -10,12 +10,12 @@ namespace CoCaro.Model
     {
         public int Id { get; set; }
         public List<string> Moves { get; set; }
-        public int LimitedMoves { get; set; }    
+        public int LimitedMoves { get; set; } 
         public CoTheGameLevel()
         {
             this.Id = 0;
             this.Moves = new List<string>();
-            this.LimitedMoves = 0;
+            this.LimitedMoves = -1;
         }
         public CoTheGameLevel(int Id, List<string> Moves, int LimitedMoves):this()
         {

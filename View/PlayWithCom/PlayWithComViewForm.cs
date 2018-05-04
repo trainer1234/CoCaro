@@ -332,7 +332,7 @@ namespace CoCaro.View.PlayWithCom
                 label.Height = ChessBoard.ChessSize;
                 label.Width = ChessBoard.ChessSize;
                 label.Location = new Point(ChessBoard.BoardPaddingLeft + ChessBoard.ChessSize * i,
-                    ChessBoard.BoardPaddingTop - ChessBoard.ChessSize);
+                    ChessBoard.BoardPaddingTop);
                 Controls.Add(label);
             }
 
@@ -345,7 +345,7 @@ namespace CoCaro.View.PlayWithCom
                 label.Height = ChessBoard.ChessSize;
                 label.Width = ChessBoard.ChessSize;
                 label.Location = new Point(ChessBoard.BoardPaddingLeft - ChessBoard.ChessSize,
-                    ChessBoard.BoardPaddingTop + ChessBoard.ChessSize * i);
+                    ChessBoard.BoardPaddingTop + ChessBoard.ChessSize * (i + 1));
                 Controls.Add(label);
             }
 
@@ -358,7 +358,7 @@ namespace CoCaro.View.PlayWithCom
                     button.Width = ChessBoard.ChessSize;
                     button.Height = ChessBoard.ChessSize;
                     button.Location = new Point(ChessBoard.BoardPaddingLeft + ChessBoard.ChessSize * (j - 1),
-                        ChessBoard.BoardPaddingTop + ChessBoard.ChessSize * (i - 1));
+                        ChessBoard.BoardPaddingTop + ChessBoard.ChessSize * (i));
                     button.Click += btnChess_Click;
                     button.BackgroundImageLayout = ImageLayout.Stretch;
                     Controls.Add(button);                    
