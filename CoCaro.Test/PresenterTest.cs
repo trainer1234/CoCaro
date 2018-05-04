@@ -58,13 +58,13 @@ namespace CoCaro.Test
         public void CreateNewGame_Always_CallsCreateNewGameMethodFromDataSource()
         {
             // Arrange
-            mockDataSource.Setup(mock => mock.CreateNewGame(false));
+            mockDataSource.Setup(mock => mock.CreateNewGame(false, -1));
 
             // Act
             systemUnderTest.CreateNewGame();
 
             // Assert
-            mockDataSource.Verify(mock => mock.CreateNewGame(false), Times.Once);
+            mockDataSource.Verify(mock => mock.CreateNewGame(false, -1), Times.Once);
         }
 
         [Test]

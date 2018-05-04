@@ -19,11 +19,13 @@ namespace CoCaro.Model
         public Chess[,] Chesses { get; set; }        
         public int TurnOwner { get; set; }
         public bool IsEnd { get; set; }    
-        public List<string> Moves { get; set; }
+        public List<string> Moves { get; set; }        
         public int GameDuration { get; set; }
         public DateTime StartTime { get; set; }
         public int Winner { get; set; }
         public int RemainMoves { get; set; }
+        public int CoTheGameId { get; set; }
+        public List<string> InitMoves { get; set; }
         public bool IsCoTheGame { get; set; } = false;
         public ChessBoard()
         {
@@ -32,6 +34,7 @@ namespace CoCaro.Model
             IsEnd = false;
             MoveTime = 20;
             Moves = new List<string>();
+            InitMoves = new List<string>();
             StartTime = DateTime.Now;
             Winner = 0;
             RemainMoves = -1;

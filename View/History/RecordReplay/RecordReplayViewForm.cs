@@ -32,14 +32,14 @@ namespace CoCaro.View.History.RecordReplay
         public void ShowRecord(ChessBoard chessBoard)
         {
             this._ChessBoard = chessBoard;
-            initBoard(chessBoard);
+            initBoard();
         }
 
-        public void initBoard(ChessBoard chessBoard)
+        public void initBoard()
         {                       
             Label turnLabel = new Label();
             turnLabel.Name = "lblTurn";
-            turnLabel.Text = "Replay Game #" + (chessBoard.Id);
+            turnLabel.Text = "Replay Game #" + (_ChessBoard.Id);
             turnLabel.Font = new Font("Arial", 16, FontStyle.Bold);
             turnLabel.ForeColor = Color.Blue;
             turnLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -59,9 +59,9 @@ namespace CoCaro.View.History.RecordReplay
             lbMoves.Location = new Point(rightControlX,
                 ChessBoard.BoardPaddingTop);
             lbMoves.Font = new Font(new FontFamily("Arial"), 12, FontStyle.Regular);
-            for(int i = 0; i < chessBoard.Moves.Count; i++) 
+            for(int i = 0; i < _ChessBoard.Moves.Count; i++) 
             {
-                lbMoves.Items.Add((i + 1).ToString() + ".      " + chessBoard.Moves[i]);
+                lbMoves.Items.Add((i + 1).ToString() + ".      " + _ChessBoard.Moves[i].Split('_')[1]);
             }
             lbMoves.SelectedIndexChanged += lbMoves_SelectedIndexChanged;
             Controls.Add(lbMoves);
@@ -135,7 +135,7 @@ namespace CoCaro.View.History.RecordReplay
                 label.Location = new Point(ChessBoard.BoardPaddingLeft - ChessBoard.ChessSize,
                     ChessBoard.BoardPaddingTop + ChessBoard.ChessSize * i);
                 Controls.Add(label);
-            }
+            }            
 
             for (int i = 1; i <= ChessBoard.BoardRows; i++)
             {
@@ -150,9 +150,11 @@ namespace CoCaro.View.History.RecordReplay
                     button.BackgroundImageLayout = ImageLayout.Stretch;
                     Controls.Add(button);
 
-                    chessBoard.Chesses[i, j] = new Chess(j, i, 0);
+                    _ChessBoard.Chesses[i, j] = new Chess(j, i, 0);
                 }
             }
+
+            AddInitMove();
 
             this.Width = ChessBoard.BoardPaddingLeft +
                 rightControlX + lbMoves.Width;
@@ -201,6 +203,27 @@ namespace CoCaro.View.History.RecordReplay
             }
         }
 
+        private void AddInitMove()
+        {
+            for (int i = 0; i < _ChessBoard.InitMoves.Count; i++)
+            {
+                int turnOwner = int.Parse(_ChessBoard.InitMoves[i].Split('_')[0]);
+                string move = _ChessBoard.InitMoves[i].Split('_')[1];
+                int column = move[0] - 'A' + 1;
+                int row = int.Parse(move.Substring(1));
+
+                Button btnChess = Controls.Find("Chess_" + row.ToString() + "_" + column.ToString(),
+                            false)[0] as Button;
+                if (turnOwner == 1)
+                {
+                    btnChess.BackgroundImage = new Bitmap(Properties.Resources.cross);
+                }
+                else if (turnOwner == 2)
+                {
+                    btnChess.BackgroundImage = new Bitmap(Properties.Resources.round);
+                }
+            }
+        }
         private void StopAutoPlay()
         {
             timerAutoPlay.Stop();
@@ -211,7 +234,7 @@ namespace CoCaro.View.History.RecordReplay
         private void RecordReplayViewForm_Load(object sender, EventArgs e)
         {
             Presenter.GetRecord(this.RecordId);
-            this.Text = "Xem lại Game #" + (this.RecordId + 1);
+            this.Text = "Xem lại Game #" + (this.RecordId);
         }
 
         private void btnPreviousMove_Click(object sender, EventArgs e)
@@ -237,10 +260,12 @@ namespace CoCaro.View.History.RecordReplay
         private void lbMoves_SelectedIndexChanged(object sender, EventArgs e)
         {            
             ClearBoard();
+            AddInitMove();
             ListBox lbMoves = sender as ListBox;
             for(int i = 0; i <= lbMoves.SelectedIndex; i++)
             {
-                string move = lbMoves.Items[i].ToString().Split('.')[1].Trim();
+                int turnOwner = int.Parse(_ChessBoard.Moves[i].Split('_')[0]);
+                string move = _ChessBoard.Moves[i].Split('_')[1];
                 string column = (move[0] - 'A' + 1).ToString();
                 string row = (Int16.Parse(move.Substring(1))).ToString();
                 Button btnChess = Controls.Find("Chess_" +

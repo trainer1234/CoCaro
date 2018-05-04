@@ -118,7 +118,7 @@ namespace CoCaro.View.ChessBoardEditForm
             Label lblXNumber = new Label();
             lblXNumber.Name = "lblXNumber";
             lblXNumber.Width = buttonWidth;
-            lblXNumber.Height = buttonHeight;
+            lblXNumber.Height = 20;
             lblXNumber.Font = new Font("Arial", 12, FontStyle.Bold);
             lblXNumber.TextAlign = ContentAlignment.MiddleCenter;
             lblXNumber.Location = new Point(rightControlX, 
@@ -130,11 +130,11 @@ namespace CoCaro.View.ChessBoardEditForm
             Label lblONumber = new Label();
             lblONumber.Name = "lblONumber";
             lblONumber.Width = buttonWidth;
-            lblONumber.Height = buttonHeight;
+            lblONumber.Height = 30;
             lblONumber.Font = new Font("Arial", 12, FontStyle.Bold);
             lblONumber.TextAlign = ContentAlignment.MiddleCenter;
             lblONumber.Location = new Point(rightControlX,
-                lblXNumber.Location.Y + lblXNumber.Height);
+                lblXNumber.Location.Y + 20);
             lblONumber.ForeColor = Color.Orange;
             lblONumber.Text = "Số quân O: " + countO.ToString();
             Controls.Add(lblONumber);
@@ -187,7 +187,7 @@ namespace CoCaro.View.ChessBoardEditForm
             }
             else
             {
-                title.Text = "Chỉnh sửa level " + gameLevel.Id.ToString();
+                title.Text = "Chỉnh sửa game " + gameLevel.Id.ToString();
             }            
             title.Font = new Font("Arial", 16, FontStyle.Bold);
             title.ForeColor = Color.Blue;
@@ -396,10 +396,14 @@ namespace CoCaro.View.ChessBoardEditForm
             if (this.isAddingLevel)
             {
                 Presenter.AddGameLevel(this.gameLevel);
+                MessageBox.Show("Thêm thành công!", "Cờ thế",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
                 Presenter.SaveGameLevel(this.gameLevel);
+                MessageBox.Show("Chỉnh sửa thành công!", "Cờ thế",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             this.Close();
         }

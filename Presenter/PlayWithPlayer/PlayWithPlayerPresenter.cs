@@ -222,7 +222,8 @@ namespace CoCaro.Presenter.PlayWithPlayer
 
         public ChessBoard CreateNewGame()
         {
-            return dataSource.CreateNewGame(false);
+            _ChessBoard = dataSource.CreateNewGame(false);
+            return _ChessBoard;
         }
 
         public void EndGame(int id, int winner, int duration)
@@ -233,6 +234,7 @@ namespace CoCaro.Presenter.PlayWithPlayer
         public void StoreMove(int id, int row, int column)
         {
             string move = "";
+            move += _ChessBoard.TurnOwner + "_";
             move += ((char)(column - 1 + 'A')).ToString();
             move += (row).ToString();
             dataSource.StoreMove(id, move);

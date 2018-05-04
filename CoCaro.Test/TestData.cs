@@ -223,7 +223,6 @@ namespace CoCaro.Test
                 new ChessBoard
                 {
                     Moves = new List<string> { "J5", "J6", "J7", "J8", "J9" },
-                    Chesses = 
                 },
                 new ChessBoard
                 {

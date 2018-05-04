@@ -9,7 +9,7 @@ namespace CoCaro.Model
 {
     public interface IDataSource
     {
-        ChessBoard CreateNewGame(bool isCoThe);
+        ChessBoard CreateNewGame(bool isCoThe, int coTheGameId = -1);
         void EndGame(int id, int winner, int duration);
         void StoreMove(int id, string move);
         List<ChessBoard> GetHistory();

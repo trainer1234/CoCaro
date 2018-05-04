@@ -85,10 +85,6 @@
       <Project>{dc539f61-070d-44c8-a742-c04b6f6d2265}</Project>
       <Name>CoCaro</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CoTheManager\CoTheManager.csproj">
-      <Project>{2c7d52c2-b6c7-47c9-9ba4-313ab755f91a}</Project>
-      <Name>CoTheManager</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

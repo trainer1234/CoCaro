@@ -32,11 +32,13 @@ namespace CoCaro.Model
             //this.ChessBoards.Add(new ChessBoard(6));
         }
 
-        public ChessBoard CreateNewGame(bool isCoThe)
+        public ChessBoard CreateNewGame(bool isCoThe, int coTheGameId = -1)
         {
             Game newGame = new Game
             {
-                StartTime = DateTime.Now
+                StartTime = DateTime.Now,
+                IsCoTheGame = isCoThe, 
+                CoTheGameId = coTheGameId
             };
             caroContext.Games.Add(newGame);
             caroContext.SaveChanges();
@@ -56,15 +58,30 @@ namespace CoCaro.Model
             if (games != null)
             {
                 var currentGame = games.SingleOrDefault(game => game.Id == id);
+
+                List<string> initMoves = new List<string>();
+                if (currentGame.IsCoTheGame == true)
+                {
+                    var coTheMoves = caroContext.CoTheMoves.Where(move =>
+                    move.CoTheLevelId == currentGame.CoTheGameId);
+
+                    if(coTheMoves != null)
+                    {
+                        foreach(var move in coTheMoves)
+                        {
+                            initMoves.Add(move.Point);
+                        }
+                    }
+                }
                 chessboard = new ChessBoard
                 {
                     Id = currentGame.Id,
                     GameDuration = currentGame.Duration,
-                    Moves = currentGame.Moves.Select(move => move.Point).ToList(),                    
+                    Moves = currentGame.Moves.Select(move => move.Point).ToList(),
                     StartTime = currentGame.StartTime,
-                    Winner = currentGame.Winner
+                    Winner = currentGame.Winner,
+                    InitMoves = initMoves
                 };
-
             }
 
             return chessboard;

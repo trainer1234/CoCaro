@@ -30,13 +30,14 @@
         {
             this.SuspendLayout();
             // 
-            // MainForm
+            // CoTheManagerFormView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(741, 498);
             this.MaximizeBox = false;
-            this.Name = "MainForm";
+            this.Name = "CoTheManagerFormView";
             this.Text = "Quản lý Cờ thế";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
