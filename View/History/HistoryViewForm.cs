@@ -52,6 +52,6 @@ namespace CoCaro.View.History
         private void HistoryViewForm_Load(object sender, EventArgs e)
         {
             Presenter.GetHistory();            
-        }
+        }        
     }
 }

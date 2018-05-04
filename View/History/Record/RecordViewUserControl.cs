@@ -30,7 +30,7 @@ namespace CoCaro.View.History.Record
         {
             lblId.Text = "#" + (this._ChessBoard.Id).ToString();
             lblDuration.Text = this._ChessBoard.GameDuration.ToString() + "s";
-            lblStartTime.Text = this._ChessBoard.StartTime.ToLongTimeString();
+            lblStartTime.Text = this._ChessBoard.StartTime.ToString("dd/MM/yyyy hh:mm:ss");
             if(this._ChessBoard.Winner == 1)
             {
                 lblResult.Text = "X thắng";

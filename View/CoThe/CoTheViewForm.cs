@@ -27,19 +27,30 @@ namespace CoCaro.View.CoThe
 
         public void ShowLevels(List<CoTheGameLevel> gameLevels)
         {
-            this.gameLevels = gameLevels;
-            if(gameLevels == null || gameLevels.Count < 1)
-            {
-                return;
-            }
+            this.gameLevels = gameLevels;            
 
             int buttonSize = 50;
             int paddingTop = 100;
             int paddingLeft = 100;
-            int levelsInRow = 5;
+            int levelsInRow = 5;            
 
             this.Width = 2 * paddingLeft + levelsInRow * (2 * buttonSize);
-            this.Height = 2 * paddingTop + gameLevels.Count / levelsInRow * (2 * buttonSize);
+            this.Height = 3 * paddingTop + gameLevels.Count / levelsInRow * (2 * buttonSize);
+
+            if (gameLevels == null || gameLevels.Count < 1)
+            {
+                Label noGameCreated = new Label();
+                noGameCreated.Width = this.Width;
+                noGameCreated.Height = 40;
+                noGameCreated.Location = new Point(0, this.Height / 2 - 
+                    noGameCreated.Height);
+                noGameCreated.Font = new Font("Arial", 16, FontStyle.Bold);
+                noGameCreated.TextAlign = ContentAlignment.MiddleCenter;
+                noGameCreated.ForeColor = Color.Blue;
+                noGameCreated.Text = "Chưa có level cờ thế nào được tạo!";
+
+                Controls.Add(noGameCreated);
+            }
 
             Label title = new Label();
             title.Width = 100;

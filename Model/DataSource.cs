@@ -181,6 +181,7 @@ namespace CoCaro.Model
                 if(coTheLevels != null)
                 {
                     var levelToModify = coTheLevels.SingleOrDefault(level => level.Id == gameLevel.Id);
+                    levelToModify.LimitedMove = gameLevel.LimitedMoves;
                     if(levelToModify != null)
                     {
                         var coTheMoves = caroContext.CoTheMoves.ToList();

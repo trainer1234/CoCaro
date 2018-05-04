@@ -53,6 +53,7 @@ namespace CoCaro.View.MainForm
             btnRefresh.Font = new Font("Arial", 14, FontStyle.Regular);
             btnRefresh.TextAlign = ContentAlignment.MiddleCenter;
             btnRefresh.Text = "Refresh";
+            btnRefresh.Click += btnRefresh_Click;
 
             Controls.Add(btnRefresh);
 
@@ -102,6 +103,12 @@ namespace CoCaro.View.MainForm
         {            
             ChessBoardEditFormView form = new ChessBoardEditFormView();
             form.Show();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Controls.Clear();
+            Presenter.LoadLevels();
         }
     }
 }
