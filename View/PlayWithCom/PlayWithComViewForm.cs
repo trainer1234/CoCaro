@@ -274,10 +274,12 @@ namespace CoCaro.View.PlayWithCom
             if(coTheLevel.GetTurnOwner() == 1)
             {
                 turnLabel.Text = "Đến lượt máy đi";
+                chessBoard.TurnOwner = 1;
             }
             else
             {
                 turnLabel.Text = "Đến lượt bạn đi";
+                chessBoard.TurnOwner = 2;
             }
             
             turnLabel.Font = new Font("Arial", 16, FontStyle.Bold);
