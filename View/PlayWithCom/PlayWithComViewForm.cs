@@ -274,10 +274,12 @@ namespace CoCaro.View.PlayWithCom
             if(coTheLevel.GetTurnOwner() == 1)
             {
                 turnLabel.Text = "Đến lượt máy đi";
+                chessBoard.TurnOwner = 1;
             }
             else
             {
                 turnLabel.Text = "Đến lượt bạn đi";
+                chessBoard.TurnOwner = 2;
             }
             
             turnLabel.Font = new Font("Arial", 16, FontStyle.Bold);
@@ -332,7 +334,7 @@ namespace CoCaro.View.PlayWithCom
                 label.Height = ChessBoard.ChessSize;
                 label.Width = ChessBoard.ChessSize;
                 label.Location = new Point(ChessBoard.BoardPaddingLeft + ChessBoard.ChessSize * i,
-                    ChessBoard.BoardPaddingTop - ChessBoard.ChessSize);
+                    ChessBoard.BoardPaddingTop);
                 Controls.Add(label);
             }
 
@@ -345,7 +347,7 @@ namespace CoCaro.View.PlayWithCom
                 label.Height = ChessBoard.ChessSize;
                 label.Width = ChessBoard.ChessSize;
                 label.Location = new Point(ChessBoard.BoardPaddingLeft - ChessBoard.ChessSize,
-                    ChessBoard.BoardPaddingTop + ChessBoard.ChessSize * i);
+                    ChessBoard.BoardPaddingTop + ChessBoard.ChessSize * (i + 1));
                 Controls.Add(label);
             }
 
@@ -358,7 +360,7 @@ namespace CoCaro.View.PlayWithCom
                     button.Width = ChessBoard.ChessSize;
                     button.Height = ChessBoard.ChessSize;
                     button.Location = new Point(ChessBoard.BoardPaddingLeft + ChessBoard.ChessSize * (j - 1),
-                        ChessBoard.BoardPaddingTop + ChessBoard.ChessSize * (i - 1));
+                        ChessBoard.BoardPaddingTop + ChessBoard.ChessSize * (i));
                     button.Click += btnChess_Click;
                     button.BackgroundImageLayout = ImageLayout.Stretch;
                     Controls.Add(button);                    

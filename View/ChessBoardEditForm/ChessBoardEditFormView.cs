@@ -139,7 +139,7 @@ namespace CoCaro.View.ChessBoardEditForm
             lblONumber.Text = "Số quân O: " + countO.ToString();
             Controls.Add(lblONumber);
 
-            if (gameLevel.LimitedMoves >= 0)
+            if (gameLevel.LimitedMoves < 0)
             {
                 rdbUnlimited.Checked = true;
                 txtLimitMoves.Enabled = false;
